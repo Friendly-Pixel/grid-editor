@@ -1,0 +1,198 @@
+@editGutter: 5px;
+@drawerHeight: 32px;
+@rowTextColor: #666;
+@colColor: #2FA4E7;
+@colTextColor: darken(@colColor, 10%);
+
+.ge-mainControls {
+    position: relative;
+    min-height: 22px;
+    margin-bottom: 10px;
+    
+    .ge-wrapper {
+        padding-top: 5px;
+    }
+    .ge-wrapper.ge-top {
+        .container {
+            margin: 0;
+            padding: 0;
+            width: auto;
+        }
+    }
+    .ge-wrapper.ge-fixed {
+        position: fixed;
+        z-index: 20;
+        top: 0;
+    }
+    
+    .ge-addRowGroup {
+        .btn.btn-primary {
+            background: #f4f4f4;
+            color: @rowTextColor;
+            border-color: #999;
+        }
+        
+        .ge-row-icon {
+            display: inline-block;
+            width: 48px;
+            margin: 0;
+            
+            .column {
+                height: 10px;
+                background: #666;
+                padding: 0;
+                border-left: 2px solid #f4f4f4;
+            }
+        }
+    }
+    
+    .ge-layout-mode {
+        position: relative;
+        top: -1px;
+    }
+    
+    .btn:focus {
+        box-shadow: none;
+        outline: none;
+    }
+}
+
+.ge-html-output {
+    width: 100%;
+    display: none;
+}
+
+/* Not editing */
+.ge-canvas {
+    .ge-tools-drawer {
+        display: none;
+    }
+}
+
+/* While editing */
+.ge-canvas.ge-editing {
+    
+    .ge-tools-drawer {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background: blue;
+        margin: 0 -@editGutter @editGutter;
+        display: block;
+        
+        > a {
+            display: inline-block;
+            padding: 5px;
+            
+        }
+        > a:hover {
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+        .ge-details {
+            padding: 5px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            display: none;
+            
+            .btn-group {
+                a {
+                    color: #333;
+                }
+                a:hover {
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            }
+            input.ge-id {
+                border: 1px solid #7F7F7F;
+                border-radius: 4px;
+                font-size: 11px;
+                padding: 2px 5px;
+                margin-right: 5px; 
+                width: 80px;
+            }
+        }
+    }
+    .row {
+        background-color: #efefef;
+        border: 1px solid rgb(153,153,153);
+        padding: 0 @editGutter @editGutter;
+        margin-bottom: @editGutter;
+        
+        .row {
+            /* Nested rows*/
+            margin-left: 0;
+            margin-right: 0;
+        }
+        
+        > .ge-tools-drawer {
+            > a {
+                color: #666;
+            }
+            > a.ge-add-column {
+                color: @colTextColor;
+            }
+            // background: rgba(153,153,153,0.2);
+            background: #e5e5e5;
+        }
+    }
+    .column {
+        background-color: fadeout(@colColor, 85%);
+        border: 1px solid @colColor;
+        padding: 0 @editGutter @editGutter;
+        
+        > .ge-tools-drawer {
+            a {
+                color: @colTextColor;
+            }
+            > a.ge-add-row {
+                color: @rowTextColor;
+            }
+            background: #afd5ea;
+        }
+    }
+    
+    /* Content area */
+    .ge-content-type-tinymce.active {
+        outline: 1px dotted #333;
+    }
+    
+    /* Sorting */
+    .ui-sortable-placeholder {
+        background: fadeout(yellow, 80%);
+        visibility: visible !important;
+        min-height: 50px;
+    }
+}
+
+/* Layout modes */
+
+.layoutMode(phone, xs, sm, md, lg, 450px);
+.layoutMode(tablet, sm, xs, md, lg, 800px);
+.layoutMode(desktop, md, xs, sm, lg, none);
+
+.layoutMode(@type, @e, @d1, @d2, @d3, @maxWidth) {
+    .ge-canvas.ge-layout-@{type} {
+        max-width: @maxWidth;
+        .disable-columns(@d1, @d2, @d3);
+        .generate-columns(@e);
+    }
+}
+
+.disable-columns(@d1, @d2, @d3, @i: 1) when (@i =< 12) {
+  .col-@{d1}-@{i},
+  .col-@{d2}-@{i},
+  .col-@{d3}-@{i} {
+    width: inherit;
+  }
+  .disable-columns(@d1, @d2, @d3, (@i + 1));
+}
+
+.generate-columns(@e, @i: 1) when (@i =< 12) {
+  .col-@{e}-@{i} {
+    width: @i * 8.33333333333%;
+  }
+  .generate-columns(@e, (@i + 1));
+}
