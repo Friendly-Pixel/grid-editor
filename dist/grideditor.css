@@ -33,8 +33,7 @@
   border-left: 2px solid #f4f4f4;
 }
 .ge-mainControls .ge-layout-mode {
-  position: relative;
-  top: -1px;
+  margin-left: 5px;
 }
 .ge-mainControls .btn:focus {
   box-shadow: none;
@@ -96,9 +95,6 @@
   border: 1px solid #999999;
   padding: 0 5px 5px;
   margin-bottom: 5px;
-}
-.ge-canvas.ge-editing .row .row {
-  /* Nested rows*/
   margin-left: 0;
   margin-right: 0;
 }
@@ -136,6 +132,8 @@
 /* Layout modes */
 .ge-canvas.ge-layout-phone {
   max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .ge-canvas.ge-layout-phone .col-sm-1,
 .ge-canvas.ge-layout-phone .col-md-1,
@@ -235,6 +233,8 @@
 }
 .ge-canvas.ge-layout-tablet {
   max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .ge-canvas.ge-layout-tablet .col-xs-1,
 .ge-canvas.ge-layout-tablet .col-md-1,
@@ -334,6 +334,8 @@
 }
 .ge-canvas.ge-layout-desktop {
   max-width: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 .ge-canvas.ge-layout-desktop .col-xs-1,
 .ge-canvas.ge-layout-desktop .col-sm-1,

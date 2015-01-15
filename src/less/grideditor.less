@@ -47,8 +47,7 @@
     }
     
     .ge-layout-mode {
-        position: relative;
-        top: -1px;
+        margin-left: 5px;
     }
     
     .btn:focus {
@@ -120,12 +119,8 @@
         border: 1px solid rgb(153,153,153);
         padding: 0 @editGutter @editGutter;
         margin-bottom: @editGutter;
-        
-        .row {
-            /* Nested rows*/
-            margin-left: 0;
-            margin-right: 0;
-        }
+        margin-left: 0;
+        margin-right: 0;
         
         > .ge-tools-drawer {
             > a {
@@ -176,6 +171,8 @@
 .layoutMode(@type, @e, @d1, @d2, @d3, @maxWidth) {
     .ge-canvas.ge-layout-@{type} {
         max-width: @maxWidth;
+        margin-left: auto;
+        margin-right: auto;
         .disable-columns(@d1, @d2, @d3);
         .generate-columns(@e);
     }
