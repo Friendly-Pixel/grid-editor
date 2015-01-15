@@ -57,3 +57,8 @@ __`row_tools`:__ add extra tool button to the row toolbar.<br>
     });
     
 __`col_tools`:__ the same as row_tools, but for columns.
+
+Attribution
+-----------
+
+Grid Editor was heavily inspired by [Neokoenig's grid manager](https://github.com/neokoenig/jQuery-gridmanager)
