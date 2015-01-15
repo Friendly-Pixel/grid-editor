@@ -5,7 +5,7 @@ Grid Editor is a visual javascript editor for the [bootstrap grid system](http:/
 
 ![Preview](http://i.imgur.com/UF9CCzk.png) 
 
-# <a href="http://transfer.frontwise.com/frontwise/grid-editor/example/" target="_blank">View the demo!</a>
+# <a href="http://transfer.frontwise.com/frontwise/grid-editor/example/" target="_blank">Try the demo!</a>
 
 Installation
 ------------
