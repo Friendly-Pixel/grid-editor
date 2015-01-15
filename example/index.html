@@ -16,8 +16,11 @@
     
     <script>
         $(function() {
-            $('#myGrid').gridEditor();
-        })
+            $('#myGrid').gridEditor({
+                new_row_layouts: [[12], [6,6], [9,3]],
+                content_types: ['tinymce'],
+            });
+        });
     </script>
     
     <title>Grid Editor example</title>

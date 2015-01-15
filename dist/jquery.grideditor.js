@@ -27,7 +27,7 @@ $.fn.gridEditor = function( options ) {
             'col_tools'         : [], /* Example:
                                         [ {
                                             title: 'Set background image',
-                                            iconClass: 'glyphicon-image',
+                                            iconClass: 'glyphicon-picture',
                                             on: { click: function() {} }
                                         } ]
                                     */
@@ -212,6 +212,9 @@ $.fn.gridEditor = function( options ) {
                 createTool(drawer, 'Settings', '', 'glyphicon-cog', function() {
                     details.toggle();
                 });
+                settings.row_tools.forEach(function(t) {
+                    createTool(drawer, t.title || '', t.className || '', t.iconClass || 'glyphicon-wrench', t.on);
+                });
                 createTool(drawer, 'Remove row', '', 'glyphicon-trash', function() {
                     row.slideUp(function() {
                         row.remove();
@@ -256,9 +259,9 @@ $.fn.gridEditor = function( options ) {
                 createTool(drawer, 'Settings', '', 'glyphicon-cog', function() {
                     details.toggle();
                 });
-
+                
                 settings.col_tools.forEach(function(t) {
-                    createTool(drawer, t.title, t.className, t.iconClass, t.on);
+                    createTool(drawer, t.title || '', t.className || '', t.iconClass || 'glyphicon-wrench', t.on);
                 });
 
                 createTool(drawer, 'Remove col', '', 'glyphicon-trash', function() {
