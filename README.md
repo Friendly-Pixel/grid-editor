@@ -3,7 +3,7 @@ Grid Editor
 
 Grid Editor is a visual javascript editor for the [bootstrap grid system](http://getbootstrap.com/css/#grid), written as a [jQuery](http://jquery.com/) plugin.
 
-![Preview](http://i.imgur.com/UF9CCzk.png) 
+![Preview](http://i.imgur.com/UF9CCzk.png)
 
 # <a href="http://transfer.frontwise.com/frontwise/grid-editor/example/" target="_blank">Try the demo!</a>
 
@@ -11,7 +11,7 @@ Installation
 ------------
 
 * __Dependencies:__ Grid Editor depens on jQuery, jQuery UI, and Bootstap, so make sure you have included those in the page. If you want to use the tincyMCE integration, load tinyMCE en tinyMCE jQuery plugin as well.
-* [Download the latest version of Grid Editor](https://github.com/Frontwise/grid-editor/archive/master.zip) and include it in your page: 
+* [Download the latest version of Grid Editor](https://github.com/Frontwise/grid-editor/archive/master.zip) and include it in your page:
 
 ```html
 <!-- Make sure jQuery, jQuery UI, and bootstrap 3 are included. TinyMCE is optional. -->
@@ -26,7 +26,7 @@ $('#myGrid').gridEditor({
     new_row_layouts: [[12], [6,6], [9,3]],
 });
 ```
-    
+
 Options
 -------
 
@@ -55,7 +55,7 @@ $('#myGrid').gridEditor({
     row_tools: [{
         title: 'Set background image',
         iconClass: 'glyphicon-picture',
-        on: { 
+        on: {
             click: function() {
                 $(this).closest('.row').css('background-image', 'url(http://placekitten.com/g/300/300)');
             }
@@ -63,8 +63,12 @@ $('#myGrid').gridEditor({
     }]
 });
 ```
-    
+
 __`col_tools`:__ the same as row_tools, but for columns.
+
+__`col_min_size`:__ minimal size of a column (1-12)
+
+__`col_stop_size`:__ steps when resizing a column (1-12)
 
 Attribution
 -----------
