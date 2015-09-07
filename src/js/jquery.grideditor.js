@@ -174,7 +174,7 @@ $.fn.gridEditor = function( options ) {
                 if (rte) {
                     rte.init(settings, $(this));
                 }
-            })
+            });
         }
 
         function reset() {
