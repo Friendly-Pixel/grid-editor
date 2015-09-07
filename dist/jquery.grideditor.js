@@ -7,6 +7,22 @@
 $.fn.gridEditor = function( options ) {
 
     var self = this;
+    var grideditor = self.data('grideditor');
+    
+    /** Methods **/
+    
+    if (arguments[0] == 'getHtml') {
+        if (grideditor) {
+            grideditor.deinit();
+            var html = self.html();
+            grideditor.init();
+            return html;
+        } else {
+            return self.html();
+        }
+    } 
+    
+    /** Initialize plugin */
 
     self.each(function(baseIndex, baseElem) {
         baseElem = $(baseElem);
@@ -60,7 +76,7 @@ $.fn.gridEditor = function( options ) {
 
             // Add row
             addRowGroup = $('<div class="ge-addRowGroup btn-group" />').appendTo(wrapper);
-            $.each(settings.new_row_layouts, function(i, layout) {
+            $.each(settings.new_row_layouts, function(j, layout) {
                 var btn = $('<a class="btn btn-xs btn-primary" />')
                     .attr('title', 'Add row ' + layout.join('-'))
                     .on('click', function() {
@@ -174,7 +190,7 @@ $.fn.gridEditor = function( options ) {
                 if (rte) {
                     rte.init(settings, $(this));
                 }
-            })
+            });
         }
 
         function reset() {
@@ -197,7 +213,7 @@ $.fn.gridEditor = function( options ) {
             var contents = canvas.find('.ge-content').each(function() {
                 var content = $(this);
                 getRTE(content.data('ge-content-type')).deinit(settings, content);
-            })
+            });
             canvas.find('.ge-tools-drawer').remove();
             removeSortable();
         }
@@ -290,7 +306,7 @@ $.fn.gridEditor = function( options ) {
                 .appendTo(drawer)
             ;
             if (typeof eventHandlers == 'function') {
-                tool.on('click', eventHandlers)
+                tool.on('click', eventHandlers);
             }
             if (typeof eventHandlers == 'object') {
                 $.each(eventHandlers, function(name, func) {
@@ -403,7 +419,7 @@ $.fn.gridEditor = function( options ) {
                 handle: '> .ge-tools-drawer .ge-move',
                 start: sortStart,
                 helper: 'clone',
-            })
+            });
 
             function sortStart(e, ui) {
                 ui.placeholder.css({ height: ui.item.outerHeight()});
@@ -444,7 +460,7 @@ $.fn.gridEditor = function( options ) {
                     }
                 });
                 doWrap(contents);
-            })
+            });
         }
         function doWrap(contents) {
             if (contents.length) {
@@ -477,7 +493,7 @@ $.fn.gridEditor = function( options ) {
         baseElem.data('grideditor', {
             init: init,
             deinit: deinit,
-        })
+        });
 
     });
 

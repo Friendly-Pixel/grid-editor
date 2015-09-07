@@ -7,6 +7,22 @@
 $.fn.gridEditor = function( options ) {
 
     var self = this;
+    var grideditor = self.data('grideditor');
+    
+    /** Methods **/
+    
+    if (arguments[0] == 'getHtml') {
+        if (grideditor) {
+            grideditor.deinit();
+            var html = self.html();
+            grideditor.init();
+            return html;
+        } else {
+            return self.html();
+        }
+    } 
+    
+    /** Initialize plugin */
 
     self.each(function(baseIndex, baseElem) {
         baseElem = $(baseElem);

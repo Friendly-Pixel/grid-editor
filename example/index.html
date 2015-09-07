@@ -20,6 +20,10 @@
                 new_row_layouts: [[12], [6,6], [9,3]],
                 content_types: ['tinymce'],
             });
+            
+            // Get resulting html
+            var html = $('#myGrid').gridEditor('getHtml');
+            console.log(html);
         });
     </script>
     

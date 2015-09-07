@@ -25,6 +25,17 @@ Usage
 $('#myGrid').gridEditor({
     new_row_layouts: [[12], [6,6], [9,3]],
 });
+// Call this to get the result after the user has done some editing:
+var html = $('#myGrid').gridEditor('getHtml');
+```
+
+Methods
+-------
+
+__`getHtml`:__ Returns the clean html, after the user has done some editing
+
+```javascript
+var html = $('#myGrid').gridEditor('getHtml');
 ```
     
 Options
