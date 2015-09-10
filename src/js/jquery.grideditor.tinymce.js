@@ -15,14 +15,23 @@
                         contentArea.html('');
                     }
                     contentArea.addClass('active');
-                    var tiny = contentArea.tinymce((settings.tinymce && settings.tinymce.config) || {inline: true});
-                    setTimeout(function() {
-                        tiny.focus();
-                    })
+                    var configuration = $.extend(
+                        (settings.tinymce && settings.tinymce.config ? settings.tinymce.config : {}),
+                        {
+                            inline: true,
+                            oninit: function(editor) {
+                                try {
+                                    settings.tinymce.config.oninit(editor);
+                                } catch(e) {}
+                                $('#'+editor.settings.id).focus();
+                            }
+                        }
+                    );
+                    var tiny = contentArea.tinymce(configuration);
                 }
             });
         },
-        
+
         deinit: function(settings, contentAreas) {
             contentAreas.filter('.active').each(function() {
                 var contentArea = $(this);
@@ -38,7 +47,7 @@
                 ;
             });
         },
-        
+
         initialContent: '<p>Lorem ipsum dolores</p>',
     }
 })();
