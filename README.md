@@ -32,7 +32,7 @@ var html = $('#myGrid').gridEditor('getHtml');
 Methods
 -------
 
-__`getHtml`:__ Returns the clean html
+__`getHtml`:__ Returns the clean html.
 
 ```javascript
 var html = $('#myGrid').gridEditor('getHtml');
@@ -41,7 +41,7 @@ var html = $('#myGrid').gridEditor('getHtml');
 Options
 -------
 
-__`new_row_layouts`:__ set the column layouts that appear in the "new row" buttons at the top of the editor.<br>
+__`new_row_layouts`:__ Set the column layouts that appear in the "new row" buttons at the top of the editor.
 
 ```javascript
 $('#myGrid').gridEditor({
@@ -49,7 +49,7 @@ $('#myGrid').gridEditor({
 });
 ```
 
-__`row_classes`:__ set the css classes that the user can toggle on the rows, under the settings button.<br>
+__`row_classes`:__ Set the css classes that the user can toggle on the rows, under the settings button.
 
 ```javascript
 $('#myGrid').gridEditor({
@@ -57,9 +57,9 @@ $('#myGrid').gridEditor({
 });
 ```
 
-__`col_classes`:__ the same as row_classes, but for columns.
+__`col_classes`:__ The same as row_classes, but for columns.
 
-__`row_tools`:__ add extra tool button to the row toolbar.<br>
+__`row_tools`:__ Add extra tool button to the row toolbar.
 
 ```javascript
 $('#myGrid').gridEditor({
@@ -75,7 +75,7 @@ $('#myGrid').gridEditor({
 });
 ```
     
-__`col_tools`:__ the same as row_tools, but for columns.
+__`col_tools`:__ The same as row_tools, but for columns.
 
 Attribution
 -----------
