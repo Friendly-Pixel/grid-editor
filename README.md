@@ -32,7 +32,7 @@ var html = $('#myGrid').gridEditor('getHtml');
 Methods
 -------
 
-__`getHtml`:__ Returns the clean html, after the user has done some editing
+__`getHtml`:__ Returns the clean html
 
 ```javascript
 var html = $('#myGrid').gridEditor('getHtml');
