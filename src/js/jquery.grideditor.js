@@ -38,6 +38,8 @@ $.fn.gridEditor = function( options ) {
                                     [4, 8],
                                     [8, 4]
                                 ],
+            'col_min_size'      : 1,
+            'col_step_size'     : 1,
             'row_classes'       : [{ label: 'Example class', cssClass: 'example-class'}],
             'col_classes'       : [{ label: 'Example class', cssClass: 'example-class'}],
             'col_tools'         : [], /* Example:
@@ -59,6 +61,7 @@ $.fn.gridEditor = function( options ) {
         ;
         var colClasses = ['col-md-', 'col-sm-', 'col-xs-'];
         var curColClassIndex = 0; // Index of the column class we are manipulating currently
+        var MIN_COL_SIZE = settings.col_min_size;
         var MAX_COL_SIZE = 12;
 
         setup();
@@ -254,18 +257,17 @@ $.fn.gridEditor = function( options ) {
 
                 createTool(drawer, 'Move', 'ge-move', 'glyphicon-move');
 
-                createTool(drawer, 'Make column narrower\n(hold shift for min)', 'ge-decrease-col-width', 'glyphicon-minus', function(e) {
-                    var curColClass = colClasses[curColClassIndex];
-                    var newSize = getColSize(col, curColClass) - 1;
-                    if (e.shiftKey) {
-                        newSize = 1;
+                createTool(drawer, 'Make column narrower\n(hold shift for min)', 'ge-decrease-col-width', 'glyphicon-minus', function(e) {                    var curColClass = colClasses[curColClassIndex];
+                    var newSize = getColSize(col, curColClass) - settings.col_step_size;
+                    if (e.shiftKey || newSize < MIN_COL_SIZE) {
+                        newSize = MIN_COL_SIZE;
                     }
                     setColSize(col, curColClass, Math.max(newSize, 1));
                 });
 
                 createTool(drawer, 'Make column wider\n(hold shift for max)', 'ge-increase-col-width', 'glyphicon-plus', function(e) {
                     var curColClass = colClasses[curColClassIndex];
-                    var newSize = getColSize(col, curColClass) + 1;
+                    var newSize = getColSize(col, curColClass) + settings.col_step_size;
                     if (e.shiftKey) {
                         newSize = MAX_COL_SIZE;
                     }
@@ -275,7 +277,7 @@ $.fn.gridEditor = function( options ) {
                 createTool(drawer, 'Settings', '', 'glyphicon-cog', function() {
                     details.toggle();
                 });
-                
+
                 settings.col_tools.forEach(function(t) {
                     createTool(drawer, t.title || '', t.className || '', t.iconClass || 'glyphicon-wrench', t.on);
                 });
@@ -485,7 +487,7 @@ $.fn.gridEditor = function( options ) {
                 canvas.toggleClass(cssClass, i == colClassIndex);
             });
         }
-        
+
         function getRTE(type) {
             return $.fn.gridEditor.RTEs[type];
         }
