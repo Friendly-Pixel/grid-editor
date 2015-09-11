@@ -77,6 +77,14 @@ $('#myGrid').gridEditor({
     
 __`col_tools`:__ The same as row_tools, but for columns.
 
+__`valid_col_sizes`:__ Specify the column widths that can be selected using the +/- buttons
+
+```javascript
+$('#myGrid').gridEditor({
+    'valid_col_sizes': [2, 5, 8, 10],
+});
+```
+
 Attribution
 -----------
 

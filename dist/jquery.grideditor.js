@@ -49,6 +49,7 @@ $.fn.gridEditor = function( options ) {
                                     */
             'row_tools'         : [],
             'content_types'     : ['tinymce'],
+            'valid_col_sizes'   : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         }, options);
 
         // Elems
@@ -255,19 +256,24 @@ $.fn.gridEditor = function( options ) {
                 createTool(drawer, 'Move', 'ge-move', 'glyphicon-move');
 
                 createTool(drawer, 'Make column narrower\n(hold shift for min)', 'ge-decrease-col-width', 'glyphicon-minus', function(e) {
+                    var colSizes = settings.valid_col_sizes;
                     var curColClass = colClasses[curColClassIndex];
-                    var newSize = getColSize(col, curColClass) - 1;
+                    var curColSizeIndex = colSizes.indexOf(getColSize(col, curColClass));
+                    var newSize = colSizes[clamp(curColSizeIndex - 1, 0, colSizes.length - 1)];
                     if (e.shiftKey) {
-                        newSize = 1;
+                        newSize = colSizes[0];
                     }
                     setColSize(col, curColClass, Math.max(newSize, 1));
                 });
 
                 createTool(drawer, 'Make column wider\n(hold shift for max)', 'ge-increase-col-width', 'glyphicon-plus', function(e) {
+                    var colSizes = settings.valid_col_sizes;
                     var curColClass = colClasses[curColClassIndex];
-                    var newSize = getColSize(col, curColClass) + 1;
+                    var curColSizeIndex = colSizes.indexOf(getColSize(col, curColClass));
+                    var newColSizeIndex = clamp(curColSizeIndex + 1, 0, colSizes.length - 1);
+                    var newSize = colSizes[newColSizeIndex];
                     if (e.shiftKey) {
-                        newSize = MAX_COL_SIZE;
+                        newSize = colSizes[colSizes.length - 1];
                     }
                     setColSize(col, curColClass, Math.min(newSize, MAX_COL_SIZE));
                 });
@@ -489,6 +495,10 @@ $.fn.gridEditor = function( options ) {
         function getRTE(type) {
             return $.fn.gridEditor.RTEs[type];
         }
+        
+        function clamp(input, min, max) {
+            return Math.min(max, Math.max(min, input));
+        }
 
         baseElem.data('grideditor', {
             init: init,
@@ -521,14 +531,23 @@ $.fn.gridEditor.RTEs = {};
                         contentArea.html('');
                     }
                     contentArea.addClass('active');
-                    var tiny = contentArea.tinymce((settings.tinymce && settings.tinymce.config) || {inline: true});
-                    setTimeout(function() {
-                        tiny.focus();
-                    })
+                    var configuration = $.extend(
+                        (settings.tinymce && settings.tinymce.config ? settings.tinymce.config : {}),
+                        {
+                            inline: true,
+                            oninit: function(editor) {
+                                try {
+                                    settings.tinymce.config.oninit(editor);
+                                } catch(e) {}
+                                $('#'+editor.settings.id).focus();
+                            }
+                        }
+                    );
+                    var tiny = contentArea.tinymce(configuration);
                 }
             });
         },
-        
+
         deinit: function(settings, contentAreas) {
             contentAreas.filter('.active').each(function() {
                 var contentArea = $(this);
@@ -544,7 +563,7 @@ $.fn.gridEditor.RTEs = {};
                 ;
             });
         },
-        
+
         initialContent: '<p>Lorem ipsum dolores</p>',
     }
 })();
