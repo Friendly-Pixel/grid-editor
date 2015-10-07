@@ -77,8 +77,33 @@ $('#myGrid').gridEditor({
 
 __`col_tools`:__ The same as row_tools, but for columns.
 
-__`custom_filter`:__ Allows the execution of custom functions before initialization and after de-initialization. Accepts an array of functions and/or function names as string.
-Give the `canvas` element and `isInit` (true/false) as parameter to each of this functions.
+__`custom_filter`:__ Allows the execution of a custom function before initialization and after de-initialization. Accepts a functions or a function name as string.
+Gives the `canvas` element and `isInit` (true/false) as parameter.
+
+```javascript
+$('#myGrid').gridEditor({
+    'custom_filter': 'functionname',
+});
+
+function functionname(canvas, isInit) {
+    if(isInit) {
+        // do magic on init
+    } else {
+        // do magic on de-init
+    }
+}
+```
+
+or
+
+```javascript
+$('#myGrid').gridEditor({
+    'custom_filter': function(canvas, isInit) {
+        //...
+    },
+});
+```
+
 
 __`valid_col_sizes`:__ Specify the column widths that can be selected using the +/- buttons
 
