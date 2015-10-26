@@ -48,6 +48,7 @@ $.fn.gridEditor = function( options ) {
                                         } ]
                                     */
             'row_tools'         : [],
+            'custom_filter'     : '',
             'content_types'     : ['tinymce'],
             'valid_col_sizes'   : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         }, options);
@@ -200,6 +201,7 @@ $.fn.gridEditor = function( options ) {
         }
 
         function init() {
+            runFilter(true);
             canvas.addClass('ge-editing');
             addAllColClasses();
             wrapContent();
@@ -217,6 +219,7 @@ $.fn.gridEditor = function( options ) {
             });
             canvas.find('.ge-tools-drawer').remove();
             removeSortable();
+            runFilter();
         }
 
         function createRowControls() {
@@ -448,6 +451,21 @@ $.fn.gridEditor = function( options ) {
                     getRTE(settings.content_types[0]).initialContent)
                 )
             ;
+        }
+
+        /**
+         * Run custom content filter on init and deinit
+         */
+        function runFilter(isInit) {
+            if (settings.custom_filter.length) {
+                $.each(settings.custom_filter, function(key, func) {
+                    if (typeof func == 'string') {
+                        func = window[func];
+                    }
+
+                    func(canvas, isInit);
+                });
+            }
         }
 
         /**
