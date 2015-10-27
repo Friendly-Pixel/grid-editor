@@ -1,6 +1,5 @@
 /**
- * Frontwise simple cycle plugin.
- * v 1.2
+ * Frontwise grid editor plugin.
  */
 (function( $ ){
 
