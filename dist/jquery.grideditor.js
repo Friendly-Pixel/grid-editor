@@ -25,6 +25,14 @@ $.fn.gridEditor = function( options ) {
 
     self.each(function(baseIndex, baseElem) {
         baseElem = $(baseElem);
+        
+        // Wrap content if it is non-bootstrap
+        if (baseElem.children().length && !baseElem.find('div.row').length) {
+            var children = baseElem.children();
+            var row = $('<div class="row"><div class="col-md-12"/></div>').appendTo(baseElem);
+            row.find('.col-md-12').append(children);
+            console.log('hoi');
+        }
 
         var settings = $.extend({
             'new_row_layouts'   : [ // Column layouts for add row buttons
