@@ -104,6 +104,19 @@ $('#myGrid').gridEditor({
 });
 ```
 
+__`tinymce.config`:__ Specify tinyMCE config, when using the tinymce integration plugin.
+See the [tinyMCE documentation](http://www.tinymce.com/wiki.php/Configuration)
+
+```javascript
+$('#myGrid').gridEditor({
+    tinymce: {
+        config: {
+            paste_as_text: true
+        }
+    }
+});
+```
+
 __`valid_col_sizes`:__ Specify the column widths that can be selected using the +/- buttons
 
 ```javascript
