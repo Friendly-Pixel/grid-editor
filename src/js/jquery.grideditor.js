@@ -31,7 +31,6 @@ $.fn.gridEditor = function( options ) {
             var children = baseElem.children();
             var row = $('<div class="row"><div class="col-md-12"/></div>').appendTo(baseElem);
             row.find('.col-md-12').append(children);
-            console.log('hoi');
         }
 
         var settings = $.extend({
