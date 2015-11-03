@@ -38,9 +38,9 @@
         deinit: function(settings, contentAreas) {
             contentAreas.filter('.active').each(function() {
                 var contentArea = $(this);
-                var summernote = contentArea.tinymce();
+                var summernote = contentArea.summernote();
                 if (summernote) {
-                    summernote.destroy()
+                    summernote.summernote('destroy');
                 }
                 contentArea
                     .removeClass('active')
