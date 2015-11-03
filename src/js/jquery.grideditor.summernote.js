@@ -40,7 +40,7 @@
                 var contentArea = $(this);
                 var summernote = contentArea.summernote();
                 if (summernote) {
-                    summernote.destroy()
+                    summernote.summernote('destroy');
                 }
                 contentArea
                     .removeClass('active')
