@@ -57,6 +57,7 @@ $.fn.gridEditor = function( options ) {
             'custom_filter'     : '',
             'content_types'     : ['tinymce'],
             'valid_col_sizes'   : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            'source_textarea'   : ''
         }, options);
 
         // Elems
@@ -76,7 +77,20 @@ $.fn.gridEditor = function( options ) {
             /* Setup canvas */
             canvas = baseElem.addClass('ge-canvas');
 
-            htmlTextArea = $('<textarea class="ge-html-output"/>').insertBefore(canvas);
+            if(settings.source_textarea) {
+                var sourceEl = $(settings.source_textarea);
+                
+                sourceEl.addClass('ge-html-output');
+                    htmlTextArea = sourceEl;
+                    
+                if(sourceEl.val()) {
+                    self.html(sourceEl.val());
+                }
+            }
+            
+            if(typeof htmlTextArea === 'undefined' || !htmlTextArea.length) {
+                htmlTextArea = $('<textarea class="ge-html-output"/>').insertBefore(canvas);
+            }
 
             /* Create main controls*/
             mainControls = $('<div class="ge-mainControls" />').insertBefore(htmlTextArea);
