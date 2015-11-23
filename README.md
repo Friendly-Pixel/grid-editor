@@ -125,6 +125,14 @@ $('#myGrid').gridEditor({
 });
 ```
 
+__`source_textarea`:__ Allows to set an already existing textarea as in-/output for grid editor
+
+```javascript
+$('#myGrid').gridEditor({
+    source_textarea: 'textarea.grideditor',
+});
+```
+
 Font Awesome
 ------------
 
