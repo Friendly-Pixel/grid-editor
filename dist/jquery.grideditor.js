@@ -351,18 +351,24 @@ $.fn.gridEditor = function( options ) {
                 .attr('placeholder', 'id')
                 .val(container.attr('id'))
                 .attr('title', 'Set a unique identifier')
+                .blur(function (e) {
+                    container.attr('id', $(this).val());
+                })
                 .appendTo(detailsDiv)
             ;
 
             var classGroup = $('<div class="btn-group" />').appendTo(detailsDiv);
             cssClasses.forEach(function(rowClass) {
-                var btn = $('<a class="btn btn-xs btn-default" />')
+                var btn = $('<input type="text" class="ge-class" placeholder="class" />')
                     .html(rowClass.label)
                     .attr('title', rowClass.title ? rowClass.title : 'Toggle "' + rowClass.label + '" styling')
                     .toggleClass('active btn-primary', container.hasClass(rowClass.cssClass))
-                    .on('click', function() {
-                        btn.toggleClass('active btn-primary');
-                        container.toggleClass(rowClass.cssClass, btn.hasClass('active'));
+                    .val(container.attr('class'))
+                    .blur(function (e) {
+                        btn.toggleClass('active');
+                        if(btn.hasClass('active')){
+                            container.attr('class', $(this).val());
+                        }
                     })
                     .appendTo(classGroup)
                 ;
