@@ -7,9 +7,6 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
     
-    <!-- Summernote CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.1/summernote.min.css" />
-    
     <!-- Grid editor CSS -->
     <link rel="stylesheet" type="text/css" href="../dist/grideditor.css" />
     
@@ -18,8 +15,8 @@
     <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     
-    <!-- Summernote js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.1/summernote.min.js"></script>
+    <!-- Ckeditor js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.4/ckeditor.js"></script>
     
     <!-- Grid editor javascript -->
     <script src="../dist/jquery.grideditor.min.js"></script>
@@ -29,7 +26,7 @@
             // Initialize grid editor
             $('#myGrid').gridEditor({
                 new_row_layouts: [[12], [6,6], [9,3]],
-                content_types: ['summernote'],
+                content_types: ['ckeditor'],
             });
             
             // Get resulting html

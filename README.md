@@ -3,6 +3,8 @@ Grid Editor
 
 Grid Editor is a visual javascript editor for the [bootstrap grid system](http://getbootstrap.com/css/#grid), written as a [jQuery](http://jquery.com/) plugin.
 
+It provides integration plugins for the following rich text editors: TinyMCE, summernote and CKEditor.
+
 ![Preview](http://i.imgur.com/UF9CCzk.png) 
 
 # <a href="http://transfer.frontwise.com/frontwise/grid-editor/example/" target="_blank">Try the demo!</a>
@@ -13,6 +15,7 @@ Installation
 * __Dependencies:__ Grid Editor depends on jQuery, jQuery UI, and Bootstap, so make sure you have included those in the page. 
     * If you want to use the tincyMCE integration, include tinyMCE and tinyMCE jQuery plugin as well.
     * If you want to use the summernote integration, include summernote as well.
+    * If you want to use the CKEditor integration, include CKEditor as well.
 * [Download the latest version of Grid Editor](https://github.com/Frontwise/grid-editor/archive/master.zip) and include it in your page: 
 
 ```html
@@ -127,10 +130,11 @@ $('#myGrid').gridEditor({
 ### Rich text editor options
 
 Grid editor comes bundles with support for the following rich text editors (RTEs): 
-[TinyMCE](http://www.tinymce.com/) [(example)](https://transfer.frontwise.com/frontwise/grid-editor/example/index.html), 
-[summernote](http://summernote.org/) [(example)](https://transfer.frontwise.com/frontwise/grid-editor/example/summernote.html).
+* [TinyMCE](http://www.tinymce.com/) - [(example)](https://transfer.frontwise.com/frontwise/grid-editor/example/index.html)
+* [summernote](http://summernote.org/) - [(example)](https://transfer.frontwise.com/frontwise/grid-editor/example/summernote.html)
+* [CKEditor](http://ckeditor.com/) - [(example)](https://transfer.frontwise.com/frontwise/grid-editor/example/ckeditor.html)
 
-__`content_types`:__ Specify the RTE to use. Valid values: `['tinymce']`, `['summernote']`. Default value: `['tinymce']`.
+__`content_types`:__ Specify the RTE to use. Valid values: `['tinymce']`, `['summernote']`, `['ckeditor']`. Default value: `['tinymce']`.
 
 ```javascript
 $('#myGrid').gridEditor({
@@ -138,30 +142,38 @@ $('#myGrid').gridEditor({
 });
 ```
 
-__`summernote.config`:__ Specify summernote config, when using the summernote `content_types`.
+__`ckeditor.config`:__ Specify ckeditor config, when using the `ckeditor` `content_types`.
+See the [CKEditor documentation](http://docs.ckeditor.com/). 
+Also check out the [ckeditor example](https://transfer.frontwise.com/frontwise/grid-editor/example/ckeditor.html).
+
+```javascript
+$('#myGrid').gridEditor({
+    ckeditor: {
+        config: { language: 'fr' }
+    }
+});
+```
+
+__`summernote.config`:__ Specify summernote config, when using the `summernote` `content_types`.
 See the [summernote documentation](http://summernote.org/deep-dive/). 
 Also check out the [summernote example](https://transfer.frontwise.com/frontwise/grid-editor/example/summernote.html).
 
 ```javascript
 $('#myGrid').gridEditor({
     summernote: {
-        config: {
-            shortcuts: false
-        }
+        config: { shortcuts: false }
     }
 });
 ```
 
-__`tinymce.config`:__ Specify tinyMCE config, when using the tinymce `content_types`.
+__`tinymce.config`:__ Specify tinyMCE config, when using the `tinymce` `content_types`.
 See the [tinyMCE documentation](http://www.tinymce.com/wiki.php/Configuration).
 Also check out the [tinymce example](https://transfer.frontwise.com/frontwise/grid-editor/example/index.html).
 
 ```javascript
 $('#myGrid').gridEditor({
     tinymce: {
-        config: {
-            paste_as_text: true
-        }
+        config: { paste_as_text: true }
     }
 });
 ```

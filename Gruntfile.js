@@ -7,12 +7,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  var jsFiles = [
+    'src/js/jquery.grideditor.js',
+    'src/js/*.js',
+  ];
+  
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     
     concat: {
       js: {
-        src: ['src/js/*.js'],
+        src: jsFiles,
         dest: 'dist/jquery.grideditor.js',
       },
     },
@@ -22,7 +27,7 @@ module.exports = function(grunt) {
         options: {
           sourceMap: true,
         },
-        src: 'src/js/*.js',
+        src: jsFiles,
         dest: 'dist/jquery.grideditor.min.js',
       }
     },

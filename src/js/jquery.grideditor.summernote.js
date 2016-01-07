@@ -45,9 +45,9 @@
                 contentArea.summernote('destroy');
                 contentArea
                     .removeClass('active')
-                    .attr('id', null)
-                    .attr('style', null)
-                    .attr('spellcheck', null)
+                    .removeAttr('id')
+                    .removeAttr('style')
+                    .removeAttr('spellcheck')
                 ;
             });
         },
