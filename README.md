@@ -10,7 +10,9 @@ Grid Editor is a visual javascript editor for the [bootstrap grid system](http:/
 Installation
 ------------
 
-* __Dependencies:__ Grid Editor depens on jQuery, jQuery UI, and Bootstap, so make sure you have included those in the page. If you want to use the tincyMCE integration, load tinyMCE en tinyMCE jQuery plugin as well.
+* __Dependencies:__ Grid Editor depends on jQuery, jQuery UI, and Bootstap, so make sure you have included those in the page. 
+    * If you want to use the tincyMCE integration, include tinyMCE and tinyMCE jQuery plugin as well.
+    * If you want to use the summernote integration, include summernote as well.
 * [Download the latest version of Grid Editor](https://github.com/Frontwise/grid-editor/archive/master.zip) and include it in your page: 
 
 ```html
