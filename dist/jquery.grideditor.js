@@ -446,19 +446,19 @@ $.fn.gridEditor = function( options ) {
                 connectWith: '.ge-canvas .row',
                 handle: '> .ge-tools-drawer .ge-move',
                 start: sortStart,
-                helper: 'clone',
+                helper: 'clone'
             });
             canvas.add(canvas.find('.column')).sortable({
                 items: '> .row, > .ge-content',
                 connectsWith: '.ge-canvas, .ge-canvas .column',
                 handle: '> .ge-tools-drawer .ge-move',
                 start: sortStart,
-                helper: 'clone',
+                helper: 'clone'
             });
 
             function sortStart(e, ui) {
                 ui.placeholder.css({ height: ui.item.outerHeight()});
-                ui.helper.hide();
+                //ui.helper.hide();
             }
         }
 
