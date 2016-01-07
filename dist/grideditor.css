@@ -134,6 +134,7 @@
 }
 .ge-canvas.ge-editing .ui-sortable-placeholder {
   background: rgba(255, 255, 0, 0.2);
+    border: 1px dotted;
   visibility: visible !important;
   min-height: 50px;
 }
