@@ -41,6 +41,8 @@ var html = $('#myGrid').gridEditor('getHtml');
 Options
 -------
 
+### General options
+
 __`new_row_layouts`:__ Set the column layouts that appear in the "new row" buttons at the top of the editor.
 
 ```javascript
@@ -104,19 +106,6 @@ $('#myGrid').gridEditor({
 });
 ```
 
-__`tinymce.config`:__ Specify tinyMCE config, when using the tinymce integration plugin.
-See the [tinyMCE documentation](http://www.tinymce.com/wiki.php/Configuration)
-
-```javascript
-$('#myGrid').gridEditor({
-    tinymce: {
-        config: {
-            paste_as_text: true
-        }
-    }
-});
-```
-
 __`valid_col_sizes`:__ Specify the column widths that can be selected using the +/- buttons
 
 ```javascript
@@ -130,6 +119,48 @@ __`source_textarea`:__ Allows to set an already existing textarea as in-/output 
 ```javascript
 $('#myGrid').gridEditor({
     source_textarea: 'textarea.grideditor',
+});
+```
+
+### Rich text editor options
+
+Grid editor comes bundles with support for the following rich text editors (RTEs): 
+[TinyMCE](http://www.tinymce.com/) [(example)](https://transfer.frontwise.com/frontwise/grid-editor/example/index.html), 
+[summernote](http://summernote.org/) [(example)](https://transfer.frontwise.com/frontwise/grid-editor/example/summernote.html).
+
+__`content_types`:__ Specify the RTE to use. Valid values: `['tinymce']`, `['summernote']`. Default value: `['tinymce']`.
+
+```javascript
+$('#myGrid').gridEditor({
+    content_types: ['summernote'],
+});
+```
+
+__`summernote.config`:__ Specify summernote config, when using the summernote `content_types`.
+See the [summernote documentation](http://summernote.org/deep-dive/). 
+Also check out the [summernote example](https://transfer.frontwise.com/frontwise/grid-editor/example/summernote.html).
+
+```javascript
+$('#myGrid').gridEditor({
+    summernote: {
+        config: {
+            shortcuts: false
+        }
+    }
+});
+```
+
+__`tinymce.config`:__ Specify tinyMCE config, when using the tinymce `content_types`.
+See the [tinyMCE documentation](http://www.tinymce.com/wiki.php/Configuration).
+Also check out the [tinymce example](https://transfer.frontwise.com/frontwise/grid-editor/example/index.html).
+
+```javascript
+$('#myGrid').gridEditor({
+    tinymce: {
+        config: {
+            paste_as_text: true
+        }
+    }
 });
 ```
 
