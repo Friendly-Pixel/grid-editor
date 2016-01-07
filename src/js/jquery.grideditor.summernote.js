@@ -22,15 +22,19 @@
                         {
                             tabsize: 2,
                             airMode: true,
-                            oninit: function(editor) {
-                                try {
-                                    settings.summernote.config.oninit(editor);
-                                } catch(e) {}
-                                $('#'+editor.settings.id).focus();
+                            // Focus editor on creation
+                            callbacks: {
+                                onInit: function() {
+                                    try {
+                                        settings.summernote.config.callbacks.onInit.call(this);
+                                    } catch(e) {}
+                                    
+                                    contentArea.summernote('focus');
+                                }
                             }
                         }
                     );
-                    var summernote = contentArea.summernote(configuration);
+                    contentArea.summernote(configuration);
                 }
             });
         },
@@ -38,10 +42,7 @@
         deinit: function(settings, contentAreas) {
             contentAreas.filter('.active').each(function() {
                 var contentArea = $(this);
-                var summernote = contentArea.summernote();
-                if (summernote) {
-                    summernote.summernote('destroy');
-                }
+                contentArea.summernote('destroy');
                 contentArea
                     .removeClass('active')
                     .attr('id', null)
@@ -52,5 +53,5 @@
         },
 
         initialContent: '<p>Lorem ipsum dolores</p>',
-    }
+    };
 })();
