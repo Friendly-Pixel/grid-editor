@@ -576,15 +576,19 @@ $.fn.gridEditor.RTEs = {};
                         {
                             tabsize: 2,
                             airMode: true,
-                            oninit: function(editor) {
-                                try {
-                                    settings.summernote.config.oninit(editor);
-                                } catch(e) {}
-                                $('#'+editor.settings.id).focus();
+                            // Focus editor on creation
+                            callbacks: {
+                                onInit: function() {
+                                    try {
+                                        settings.summernote.config.callbacks.onInit.call(this);
+                                    } catch(e) {}
+                                    
+                                    contentArea.summernote('focus');
+                                }
                             }
                         }
                     );
-                    var summernote = contentArea.summernote(configuration);
+                    contentArea.summernote(configuration);
                 }
             });
         },
@@ -592,10 +596,7 @@ $.fn.gridEditor.RTEs = {};
         deinit: function(settings, contentAreas) {
             contentAreas.filter('.active').each(function() {
                 var contentArea = $(this);
-                var summernote = contentArea.summernote();
-                if (summernote) {
-                    summernote.summernote('destroy');
-                }
+                contentArea.summernote('destroy');
                 contentArea
                     .removeClass('active')
                     .attr('id', null)
@@ -606,7 +607,7 @@ $.fn.gridEditor.RTEs = {};
         },
 
         initialContent: '<p>Lorem ipsum dolores</p>',
-    }
+    };
 })();
 
 (function() {
@@ -634,7 +635,8 @@ $.fn.gridEditor.RTEs = {};
                                 try {
                                     settings.tinymce.config.oninit(editor);
                                 } catch(e) {}
-                                $('#'+editor.settings.id).focus();
+                                // Bring focus to text field
+                                $('#' + editor.settings.id).focus();
                             }
                         }
                     );
@@ -660,5 +662,5 @@ $.fn.gridEditor.RTEs = {};
         },
 
         initialContent: '<p>Lorem ipsum dolores</p>',
-    }
+    };
 })();
