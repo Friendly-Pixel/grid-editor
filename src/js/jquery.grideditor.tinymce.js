@@ -23,7 +23,8 @@
                                 try {
                                     settings.tinymce.config.oninit(editor);
                                 } catch(e) {}
-                                $('#'+editor.settings.id).focus();
+                                // Bring focus to text field
+                                $('#' + editor.settings.id).focus();
                             }
                         }
                     );
@@ -49,5 +50,5 @@
         },
 
         initialContent: '<p>Lorem ipsum dolores</p>',
-    }
+    };
 })();
