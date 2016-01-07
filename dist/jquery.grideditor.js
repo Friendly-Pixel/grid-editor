@@ -102,13 +102,13 @@ $.fn.gridEditor = function( options ) {
                 var btn = $('<a class="btn btn-xs btn-primary" />')
                     .attr('title', 'Add row ' + layout.join('-'))
                     .on('click', function() {
-                        var row = createRow().appendTo(canvas);
+                        var row = createRow().prependTo(canvas);
                         layout.forEach(function(i) {
-                            createColumn(i).appendTo(row);
+                            createColumn(i).prependTo(row);
                         });
                         init();
                     })
-                    .appendTo(addRowGroup)
+                    .prependTo(addRowGroup)
                 ;
 
                 btn.append('<span class="glyphicon glyphicon-plus-sign"/>');
@@ -252,6 +252,10 @@ $.fn.gridEditor = function( options ) {
                 createTool(drawer, 'Settings', '', 'glyphicon-cog', function() {
                     details.toggle();
                 });
+                createTool(drawer, 'Add column', 'ge-add-column', 'glyphicon-plus-sign', function() {
+                    row.append(createColumn(3));
+                    init();
+                });
                 settings.row_tools.forEach(function(t) {
                     createTool(drawer, t.title || '', t.className || '', t.iconClass || 'glyphicon-wrench', t.on);
                 });
@@ -260,8 +264,13 @@ $.fn.gridEditor = function( options ) {
                         row.remove();
                     });
                 });
-                createTool(drawer, 'Add column', 'ge-add-column', 'glyphicon-plus-sign', function() {
-                    row.append(createColumn(3));
+                createTool(drawer, 'Copy row', '', 'glyphicon-file', function() {
+                    var clone_data = row.clone();
+                    $('.ge-tools-drawer', clone_data).remove();
+                    copy_data = clone_data.html();
+                    var attrib = row.attr('class');
+                    row.after('<div class="'+attrib+'">'+copy_data+'</div>');
+                    //deinit();
                     init();
                 });
 
@@ -304,7 +313,12 @@ $.fn.gridEditor = function( options ) {
                 createTool(drawer, 'Settings', '', 'glyphicon-cog', function() {
                     details.toggle();
                 });
-                
+                createTool(drawer, 'Add row', 'ge-add-row', 'glyphicon-plus-sign', function() {
+                    var row = createRow();
+                    col.append(row);
+                    row.append(createColumn(6)).append(createColumn(6));
+                    init();
+                });
                 settings.col_tools.forEach(function(t) {
                     createTool(drawer, t.title || '', t.className || '', t.iconClass || 'glyphicon-wrench', t.on);
                 });
@@ -318,13 +332,15 @@ $.fn.gridEditor = function( options ) {
                         col.remove();
                     });
                 });
-
-                createTool(drawer, 'Add row', 'ge-add-row', 'glyphicon-plus-sign', function() {
-                    var row = createRow();
-                    col.append(row);
-                    row.append(createColumn(6)).append(createColumn(6));
+                createTool(drawer, 'Copy col', '', 'glyphicon-file', function() {
+                    var clone_data = col.clone();
+                    $('.ge-tools-drawer', clone_data).remove();
+                    copy_data = clone_data.html();
+                    var attrib = col.attr('class');
+                    col.after('<div class="'+attrib+'">'+copy_data+'</div>');
                     init();
                 });
+                
 
                 var details = createDetails(col, settings.col_classes).appendTo(drawer);
             });
@@ -351,18 +367,24 @@ $.fn.gridEditor = function( options ) {
                 .attr('placeholder', 'id')
                 .val(container.attr('id'))
                 .attr('title', 'Set a unique identifier')
+                .blur(function (e) {
+                    container.attr('id', $(this).val());
+                })
                 .appendTo(detailsDiv)
             ;
 
             var classGroup = $('<div class="btn-group" />').appendTo(detailsDiv);
             cssClasses.forEach(function(rowClass) {
-                var btn = $('<a class="btn btn-xs btn-default" />')
+                var btn = $('<input type="text" class="ge-class" placeholder="class" />')
                     .html(rowClass.label)
                     .attr('title', rowClass.title ? rowClass.title : 'Toggle "' + rowClass.label + '" styling')
                     .toggleClass('active btn-primary', container.hasClass(rowClass.cssClass))
-                    .on('click', function() {
-                        btn.toggleClass('active btn-primary');
-                        container.toggleClass(rowClass.cssClass, btn.hasClass('active'));
+                    .val(container.attr('class'))
+                    .blur(function (e) {
+                        btn.toggleClass('active');
+                        if(btn.hasClass('active')){
+                            container.attr('class', $(this).val());
+                        }
                     })
                     .appendTo(classGroup)
                 ;
@@ -440,19 +462,20 @@ $.fn.gridEditor = function( options ) {
                 connectWith: '.ge-canvas .row',
                 handle: '> .ge-tools-drawer .ge-move',
                 start: sortStart,
-                helper: 'clone',
+                helper: 'clone'
             });
             canvas.add(canvas.find('.column')).sortable({
                 items: '> .row, > .ge-content',
                 connectsWith: '.ge-canvas, .ge-canvas .column',
                 handle: '> .ge-tools-drawer .ge-move',
                 start: sortStart,
-                helper: 'clone',
+                helper: 'clone'
             });
 
             function sortStart(e, ui) {
                 ui.placeholder.css({ height: ui.item.outerHeight()});
-                ui.helper.hide();
+                console.log(ui);
+                //ui.helper.hide();
             }
         }
 

@@ -90,6 +90,14 @@
   margin-right: 5px;
   width: 80px;
 }
+.ge-canvas.ge-editing .ge-tools-drawer .ge-details input.ge-class {
+  border: 1px solid #7F7F7F;
+  border-radius: 4px;
+  font-size: 11px;
+  padding: 2px 5px;
+  margin-right: 5px;
+  width: 150px;
+}
 .ge-canvas.ge-editing .row {
   background-color: #efefef;
   border: 1px solid #999999;
@@ -126,6 +134,7 @@
 }
 .ge-canvas.ge-editing .ui-sortable-placeholder {
   background: rgba(255, 255, 0, 0.2);
+    border: 1px dotted;
   visibility: visible !important;
   min-height: 50px;
 }
