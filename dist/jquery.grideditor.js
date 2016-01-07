@@ -452,7 +452,6 @@ $.fn.gridEditor = function( options ) {
 
             function sortStart(e, ui) {
                 ui.placeholder.css({ height: ui.item.outerHeight()});
-                ui.helper.hide();
             }
         }
 
