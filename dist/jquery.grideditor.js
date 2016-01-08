@@ -228,6 +228,7 @@ $.fn.gridEditor = function( options ) {
             createRowControls();
             createColControls();
             makeSortable();
+            makeColResizeable();
             switchLayout(curColClassIndex);
         }
 
@@ -470,19 +471,24 @@ $.fn.gridEditor = function( options ) {
                 handle: '> .ge-tools-drawer .ge-move',
                 start: sortStart,
                 helper: 'clone'
+            }).resizable({
+                helper: "ui-resizable-helper",
+                grid: 50
             });
 
             function sortStart(e, ui) {
                 ui.placeholder.css({ height: ui.item.outerHeight()});
-                console.log(ui);
-                //ui.helper.hide();
             }
         }
 
         function removeSortable() {
             canvas.add(canvas.find('.column')).add(canvas.find('.row')).sortable('destroy');
         }
-
+        
+        function makeColResizeable(){
+            //canvas.add(canvas.find('.column'))
+        }
+        
         function createRow() {
             return $('<div class="row" />');
         }
