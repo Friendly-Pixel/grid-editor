@@ -60,7 +60,7 @@ __`row_classes`:__ Set the css classes that the user can toggle on the rows, und
 
 ```javascript
 $('#myGrid').gridEditor({
-    row_classes: [{'Example class', cssClass: 'example-class'}],
+    row_classes: [{label: 'Example class', cssClass: 'example-class'}],
 });
 ```
 
