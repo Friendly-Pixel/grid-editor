@@ -16,15 +16,18 @@
                     }
                     contentArea.addClass('active');
                     var configuration = $.extend(
+                        {},
                         (settings.tinymce && settings.tinymce.config ? settings.tinymce.config : {}),
                         {
                             inline: true,
                             oninit: function(editor) {
-                                try {
-                                    settings.tinymce.config.oninit(editor);
-                                } catch(e) {}
                                 // Bring focus to text field
                                 $('#' + editor.settings.id).focus();
+                                
+                                // Call original oninit function, if one was passed in the config
+                                if (settings.tinymce.config.oninit && typeof settings.tinymce.config.oninit == 'function') {
+                                    settings.tinymce.config.oninit(editor);
+                                }
                             }
                         }
                     );

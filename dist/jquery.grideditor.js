@@ -29,8 +29,8 @@ $.fn.gridEditor = function( options ) {
         // Wrap content if it is non-bootstrap
         if (baseElem.children().length && !baseElem.find('div.row').length) {
             var children = baseElem.children();
-            var row = $('<div class="row"><div class="col-md-12"/></div>').appendTo(baseElem);
-            row.find('.col-md-12').append(children);
+            var newRow = $('<div class="row"><div class="col-md-12"/></div>').appendTo(baseElem);
+            newRow.find('.col-md-12').append(children);
         }
 
         var settings = $.extend({
@@ -77,18 +77,18 @@ $.fn.gridEditor = function( options ) {
             /* Setup canvas */
             canvas = baseElem.addClass('ge-canvas');
 
-            if(settings.source_textarea) {
+            if (settings.source_textarea) {
                 var sourceEl = $(settings.source_textarea);
                 
                 sourceEl.addClass('ge-html-output');
                     htmlTextArea = sourceEl;
                     
-                if(sourceEl.val()) {
+                if (sourceEl.val()) {
                     self.html(sourceEl.val());
                 }
             }
             
-            if(typeof htmlTextArea === 'undefined' || !htmlTextArea.length) {
+            if (typeof htmlTextArea === 'undefined' || !htmlTextArea.length) {
                 htmlTextArea = $('<textarea class="ge-html-output"/>').insertBefore(canvas);
             }
 
@@ -465,7 +465,7 @@ $.fn.gridEditor = function( options ) {
 
         function createColumn(size) {
             return $('<div/>')
-                .addClass(colClasses.map(function(c) { return c += size }).join(' '))
+                .addClass(colClasses.map(function(c) { return c + size; }).join(' '))
                 .append(createDefaultContentWrapper().html(
                     getRTE(settings.content_types[0]).initialContent)
                 )
@@ -689,15 +689,18 @@ $.fn.gridEditor.RTEs = {};
                     }
                     contentArea.addClass('active');
                     var configuration = $.extend(
+                        {},
                         (settings.tinymce && settings.tinymce.config ? settings.tinymce.config : {}),
                         {
                             inline: true,
                             oninit: function(editor) {
-                                try {
-                                    settings.tinymce.config.oninit(editor);
-                                } catch(e) {}
                                 // Bring focus to text field
                                 $('#' + editor.settings.id).focus();
+                                
+                                // Call original oninit function, if one was passed in the config
+                                if (settings.tinymce.config.oninit && typeof settings.tinymce.config.oninit == 'function') {
+                                    settings.tinymce.config.oninit(editor);
+                                }
                             }
                         }
                     );
