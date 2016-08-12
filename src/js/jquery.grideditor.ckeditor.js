@@ -57,6 +57,6 @@
             });
         },
 
-        initialContent: '<p>Lorem initius... </p>',
+        initialContent: '<p>Click here to edit content.</p>',
     }
 })();

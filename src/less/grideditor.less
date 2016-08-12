@@ -166,7 +166,8 @@
 
 .layoutMode(phone, xs, sm, md, lg, 450px);
 .layoutMode(tablet, sm, xs, md, lg, 800px);
-.layoutMode(desktop, md, xs, sm, lg, none);
+.layoutMode(notebook, md, sm, xs, lg, 1024px);
+.layoutMode(desktop, lg, md, xs, sm, none);
 
 .layoutMode(@type, @e, @d1, @d2, @d3, @maxWidth) {
     .ge-canvas.ge-layout-@{type} {

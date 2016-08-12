@@ -52,6 +52,6 @@
             });
         },
 
-        initialContent: '<p>Lorem ipsum dolores</p>',
+        initialContent: '<p>Click here to edit content.</p>',
     };
 })();
