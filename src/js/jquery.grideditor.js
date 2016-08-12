@@ -29,8 +29,8 @@ $.fn.gridEditor = function( options ) {
         // Wrap content if it is non-bootstrap
         if (baseElem.children().length && !baseElem.find('div.row').length) {
             var children = baseElem.children();
-            var newRow = $('<div class="row"><div class="col-md-12"/></div>').appendTo(baseElem);
-            newRow.find('.col-md-12').append(children);
+            var newRow = $('<div class="row"><div class="col-lg-12"/></div>').appendTo(baseElem);
+            newRow.find('.col-lg-12').append(children);
         }
 
         var settings = $.extend({
@@ -66,7 +66,7 @@ $.fn.gridEditor = function( options ) {
             addRowGroup,
             htmlTextArea
         ;
-        var colClasses = ['col-md-', 'col-sm-', 'col-xs-'];
+        var colClasses = ['col-lg-', 'col-md-', 'col-sm-', 'col-xs-'];
         var curColClassIndex = 0; // Index of the column class we are manipulating currently
         var MAX_COL_SIZE = 12;
 
@@ -127,6 +127,7 @@ $.fn.gridEditor = function( options ) {
                 '<button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown"><span>Desktop</span></button>' +
                 '<ul class="dropdown-menu" role="menu">' +
                     '<li><a data-width="auto" title="Desktop"><span>Desktop</span></a></li>' +
+                    '<li><a title="Notebook"><span>Notebook</span></li>' +
                     '<li><a title="Tablet"><span>Tablet</span></li>' +
                     '<li><a title="Phone"><span>Phone</span></a></li>' +
                     '</ul>' +
@@ -240,6 +241,13 @@ $.fn.gridEditor = function( options ) {
             canvas.find('.ge-tools-drawer').remove();
             removeSortable();
             runFilter();
+        }
+        
+        //  allows deinit AND removing controls and textareas from canvas parent - tvaliasek
+        self.destroyEditor = function(){
+            deinit();
+            canvas.parent().children('.ge-mainControls').remove();
+            canvas.parent().children('.ge-html-output').remove();
         }
 
         function createRowControls() {
@@ -523,7 +531,7 @@ $.fn.gridEditor = function( options ) {
         function switchLayout(colClassIndex) {
             curColClassIndex = colClassIndex;
 
-            var layoutClasses = ['ge-layout-desktop', 'ge-layout-tablet', 'ge-layout-phone'];
+            var layoutClasses = ['ge-layout-desktop', 'ge-layout-notebook', 'ge-layout-tablet', 'ge-layout-phone'];
             layoutClasses.forEach(function(cssClass, i) {
                 canvas.toggleClass(cssClass, i == colClassIndex);
             });
