@@ -42,6 +42,26 @@ __`getHtml`:__ Returns the clean html.
 ```javascript
 var html = $('#myGrid').gridEditor('getHtml');
 ```
+
+Destroy, load another content and reinit
+-------
+
+```javascript
+function initEditor(elementId){ 
+    return $(elementId).gridEditor({
+        new_row_layouts: [[12], [6,6], [9,3]],
+    });
+}
+
+//init editor
+var editor = initEditor('#myGrid');
+//destroy editor
+editor.destroyEditor();
+//change html content of editor source element 
+$('#myGrid').html($('#someHtmlSource').val());
+//reinit editor with new content
+editor = initEditor('#myGrid');
+```
     
 Options
 -------
