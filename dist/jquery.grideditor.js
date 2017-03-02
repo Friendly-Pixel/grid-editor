@@ -575,11 +575,21 @@ $.fn.gridEditor.RTEs = {};
                     contentArea.addClass('active').attr('contenteditable', 'true');
                     
                     var configuration = $.extend(
+                        {},
                         (settings.ckeditor && settings.ckeditor.config ? settings.ckeditor.config : {}), 
                         {
                             // Focus editor on creation
                             on: {
                                 instanceReady: function( evt ) {
+                                    // Call original instanceReady function, if one was passed in the config
+                                    var callback;
+                                    try {
+                                        callback = settings.ckeditor.config.on.instanceReady;
+                                    } catch (err) {}
+                                    if (callback) {
+                                        callback.call(this, evt);
+                                    }
+                                    
                                     instance.focus();
                                 }
                             }
@@ -633,6 +643,7 @@ $.fn.gridEditor.RTEs = {};
                     contentArea.addClass('active');
 
                     var configuration = $.extend(
+                        {},
                         (settings.summernote && settings.summernote.config ? settings.summernote.config : {}),
                         {
                             tabsize: 2,
@@ -640,9 +651,15 @@ $.fn.gridEditor.RTEs = {};
                             // Focus editor on creation
                             callbacks: {
                                 onInit: function() {
+                                    
+                                    // Call original oninit function, if one was passed in the config
+                                    var callback;
                                     try {
-                                        settings.summernote.config.callbacks.onInit.call(this);
-                                    } catch(e) {}
+                                        callback = settings.summernote.config.callbacks.onInit;
+                                    } catch (err) {}
+                                    if (callback) {
+                                        callback.call(this);
+                                    }
                                     
                                     contentArea.summernote('focus');
                                 }
