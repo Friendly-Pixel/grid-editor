@@ -258,9 +258,11 @@ $.fn.gridEditor = function( options ) {
                     createTool(drawer, t.title || '', t.className || '', t.iconClass || 'glyphicon-wrench', t.on);
                 });
                 createTool(drawer, 'Remove row', '', 'glyphicon-trash', function() {
-                    row.slideUp(function() {
-                        row.remove();
-                    });
+                    if (confirm('Delete row?')) {
+                        row.slideUp(function() {
+                            row.remove();
+                        });
+                    }
                 });
                 createTool(drawer, 'Add column', 'ge-add-column', 'glyphicon-plus-sign', function() {
                     row.append(createColumn(3));
@@ -312,13 +314,15 @@ $.fn.gridEditor = function( options ) {
                 });
 
                 createTool(drawer, 'Remove col', '', 'glyphicon-trash', function() {
-                    col.animate({
-                        opacity: 'hide',
-                        width: 'hide',
-                        height: 'hide'
-                    }, 400, function() {
-                        col.remove();
-                    });
+                    if (confirm('Delete column?')) {
+                        col.animate({
+                            opacity: 'hide',
+                            width: 'hide',
+                            height: 'hide'
+                        }, 400, function() {
+                            col.remove();
+                        });
+                    }
                 });
 
                 createTool(drawer, 'Add row', 'ge-add-row', 'glyphicon-plus-sign', function() {
