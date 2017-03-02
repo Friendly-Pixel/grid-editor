@@ -31,7 +31,9 @@
                                     var callback;
                                     try {
                                         callback = settings.summernote.config.callbacks.onInit;
-                                    } catch (err) {}
+                                    } catch (err) {
+                                        // No callback passed
+                                    }
                                     if (callback) {
                                         callback.call(this);
                                     }

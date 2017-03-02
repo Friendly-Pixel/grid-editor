@@ -32,7 +32,9 @@
                                     var callback;
                                     try {
                                         callback = settings.ckeditor.config.on.instanceReady;
-                                    } catch (err) {}
+                                    } catch (err) {
+                                        // No callback passed
+                                    }
                                     if (callback) {
                                         callback.call(this, evt);
                                     }
@@ -68,5 +70,5 @@
         },
 
         initialContent: '<p>Lorem initius... </p>',
-    }
+    };
 })();

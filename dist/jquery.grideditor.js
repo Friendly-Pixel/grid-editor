@@ -591,7 +591,9 @@ $.fn.gridEditor.RTEs = {};
                                     var callback;
                                     try {
                                         callback = settings.ckeditor.config.on.instanceReady;
-                                    } catch (err) {}
+                                    } catch (err) {
+                                        // No callback passed
+                                    }
                                     if (callback) {
                                         callback.call(this, evt);
                                     }
@@ -627,7 +629,7 @@ $.fn.gridEditor.RTEs = {};
         },
 
         initialContent: '<p>Lorem initius... </p>',
-    }
+    };
 })();
 (function() {
 
@@ -662,7 +664,9 @@ $.fn.gridEditor.RTEs = {};
                                     var callback;
                                     try {
                                         callback = settings.summernote.config.callbacks.onInit;
-                                    } catch (err) {}
+                                    } catch (err) {
+                                        // No callback passed
+                                    }
                                     if (callback) {
                                         callback.call(this);
                                     }
@@ -724,7 +728,9 @@ $.fn.gridEditor.RTEs = {};
                                 var callback;
                                 try {
                                     callback = settings.tinymce.config.oninit;
-                                } catch (err) {}
+                                } catch (err) {
+                                    // No callback passed
+                                }
                                 
                                 if (callback) {
                                     callback.call(this);
