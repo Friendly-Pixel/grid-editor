@@ -184,6 +184,17 @@ Font Awesome
 Grid Editor can easily be used with [Font Awesome](http://fontawesome.io) by including `dist/grideditor-font-awesome.css`. Note that Font Awesome (min. version 4.0) has to be included before this stylesheet.
 
 
+Building
+--------
+
+If you want to make your own changes to the source, see BUILDING.md
+
+
+Contributing
+--------
+If you want to help out, please first read CONTRIBUTING.md
+
+
 Attribution
 -----------
 
