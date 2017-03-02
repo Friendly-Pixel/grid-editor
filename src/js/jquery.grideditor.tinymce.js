@@ -25,8 +25,13 @@
                                 $('#' + editor.settings.id).focus();
                                 
                                 // Call original oninit function, if one was passed in the config
-                                if (settings.tinymce.config.oninit && typeof settings.tinymce.config.oninit == 'function') {
-                                    settings.tinymce.config.oninit(editor);
+                                var callback;
+                                try {
+                                    callback = settings.tinymce.config.oninit;
+                                } catch (err) {}
+                                
+                                if (callback) {
+                                    callback.call(this);
                                 }
                             }
                         }
