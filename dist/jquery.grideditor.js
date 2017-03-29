@@ -258,7 +258,7 @@ $.fn.gridEditor = function( options ) {
                     createTool(drawer, t.title || '', t.className || '', t.iconClass || 'glyphicon-wrench', t.on);
                 });
                 createTool(drawer, 'Remove row', '', 'glyphicon-trash', function() {
-                    if (confirm('Delete row?')) {
+                    if (window.confirm('Delete row?')) {
                         row.slideUp(function() {
                             row.remove();
                         });
@@ -314,7 +314,7 @@ $.fn.gridEditor = function( options ) {
                 });
 
                 createTool(drawer, 'Remove col', '', 'glyphicon-trash', function() {
-                    if (confirm('Delete column?')) {
+                    if (window.confirm('Delete column?')) {
                         col.animate({
                             opacity: 'hide',
                             width: 'hide',
