@@ -264,6 +264,17 @@ $.fn.gridEditor = function( options ) {
                         });
                     }
                 });
+                
+                createTool(drawer, 'Copy row', '', 'glyphicon-file', function() {
+                    var clone_data = row.clone();
+                    $('.ge-tools-drawer', clone_data).remove();
+                    copy_data = clone_data.html();
+                    var attrib = row.attr('class');
+                    row.after('<div class="'+attrib+'">'+copy_data+'</div>');
+                    //deinit();
+                    init();
+                });
+                
                 createTool(drawer, 'Add column', 'ge-add-column', 'glyphicon-plus-sign', function() {
                     row.append(createColumn(3));
                     init();
@@ -324,7 +335,16 @@ $.fn.gridEditor = function( options ) {
                         });
                     }
                 });
-
+                
+                createTool(drawer, 'Copy col', '', 'glyphicon-file', function() {
+                    var clone_data = col.clone();
+                    $('.ge-tools-drawer', clone_data).remove();
+                    copy_data = clone_data.html();
+                    var attrib = col.attr('class');
+                    col.after('<div class="'+attrib+'">'+copy_data+'</div>');
+                    init();
+                });
+                
                 createTool(drawer, 'Add row', 'ge-add-row', 'glyphicon-plus-sign', function() {
                     var row = createRow();
                     col.append(row);
@@ -557,3 +577,177 @@ $.fn.gridEditor = function( options ) {
 $.fn.gridEditor.RTEs = {};
 
 })( jQuery );
+(function() {
+    $.fn.gridEditor.RTEs.ckeditor = {
+
+        init: function(settings, contentAreas) {
+
+            if (!window.CKEDITOR) {
+                console.error(
+                    'CKEditor not available! Make sure you loaded the ckeditor and jquery adapter js files.'
+                );
+            }
+
+            var self = this;
+            contentAreas.each(function() {
+                var contentArea = $(this);
+                if (!contentArea.hasClass('active')) {
+                    if (contentArea.html() == self.initialContent) {
+                        // CKEditor kills this '&nbsp' creating a non usable box :/ 
+                        contentArea.html('&nbsp;'); 
+                    }
+                    
+                    // Add the .attr('contenteditable',''true') or CKEditor loads readonly
+                    contentArea.addClass('active').attr('contenteditable', 'true');
+                    
+                    var configuration = $.extend(
+                        (settings.ckeditor && settings.ckeditor.config ? settings.ckeditor.config : {}), 
+                        {
+                            // Focus editor on creation
+                            on: {
+                                instanceReady: function( evt ) {
+                                    instance.focus();
+                                }
+                            }
+                        }
+                    );
+                    var instance = CKEDITOR.inline(contentArea.get(0), configuration);
+                }
+            });
+        },
+
+        deinit: function(settings, contentAreas) {
+            contentAreas.filter('.active').each(function() {
+                var contentArea = $(this);
+                
+                // Destroy all CKEditor instances
+                $.each(CKEDITOR.instances, function(_, instance) {
+                    instance.destroy();
+                });
+
+                // Cleanup
+                contentArea
+                    .removeClass('active cke_focus')
+                    .removeAttr('id')
+                    .removeAttr('style')
+                    .removeAttr('spellcheck')
+                    .removeAttr('contenteditable')
+                ;
+            });
+        },
+
+        initialContent: '<p>Lorem initius... </p>',
+    }
+})();
+(function() {
+
+    $.fn.gridEditor.RTEs.summernote = {
+
+        init: function(settings, contentAreas) {
+            
+            if (!jQuery().summernote) {
+                console.error('Summernote not available! Make sure you loaded the Summernote js file.');
+            }
+
+            var self = this;
+            contentAreas.each(function() {
+                var contentArea = $(this);
+                if (!contentArea.hasClass('active')) {
+                    if (contentArea.html() == self.initialContent) {
+                        contentArea.html('');
+                    }
+                    contentArea.addClass('active');
+
+                    var configuration = $.extend(
+                        (settings.summernote && settings.summernote.config ? settings.summernote.config : {}),
+                        {
+                            tabsize: 2,
+                            airMode: true,
+                            // Focus editor on creation
+                            callbacks: {
+                                onInit: function() {
+                                    try {
+                                        settings.summernote.config.callbacks.onInit.call(this);
+                                    } catch(e) {}
+                                    
+                                    contentArea.summernote('focus');
+                                }
+                            }
+                        }
+                    );
+                    contentArea.summernote(configuration);
+                }
+            });
+        },
+
+        deinit: function(settings, contentAreas) {
+            contentAreas.filter('.active').each(function() {
+                var contentArea = $(this);
+                contentArea.summernote('destroy');
+                contentArea
+                    .removeClass('active')
+                    .removeAttr('id')
+                    .removeAttr('style')
+                    .removeAttr('spellcheck')
+                ;
+            });
+        },
+
+        initialContent: '<p>Lorem ipsum dolores</p>',
+    };
+})();
+
+(function() {
+    $.fn.gridEditor.RTEs.tinymce = {
+        init: function(settings, contentAreas) {
+            if (!window.tinymce) {
+                console.error('tinyMCE not available! Make sure you loaded the tinyMCE js file.');
+            }
+            if (!contentAreas.tinymce) {
+                console.error('tinyMCE jquery integration not available! Make sure you loaded the jquery integration plugin.');
+            }
+            var self = this;
+            contentAreas.each(function() {
+                var contentArea = $(this);
+                if (!contentArea.hasClass('active')) {
+                    if (contentArea.html() == self.initialContent) {
+                        contentArea.html('');
+                    }
+                    contentArea.addClass('active');
+                    var configuration = $.extend(
+                        (settings.tinymce && settings.tinymce.config ? settings.tinymce.config : {}),
+                        {
+                            inline: true,
+                            oninit: function(editor) {
+                                try {
+                                    settings.tinymce.config.oninit(editor);
+                                } catch(e) {}
+                                // Bring focus to text field
+                                $('#' + editor.settings.id).focus();
+                            }
+                        }
+                    );
+                    var tiny = contentArea.tinymce(configuration);
+                }
+            });
+        },
+
+        deinit: function(settings, contentAreas) {
+            contentAreas.filter('.active').each(function() {
+                var contentArea = $(this);
+                var tiny = contentArea.tinymce();
+                if (tiny) {
+                    tiny.remove();
+                }
+                contentArea
+                    .removeClass('active')
+                    .removeAttr('id')
+                    .removeAttr('style')
+                    .removeAttr('spellcheck')
+                ;
+            });
+        },
+
+        initialContent: '<p>Lorem ipsum dolores</p>',
+    };
+})();
