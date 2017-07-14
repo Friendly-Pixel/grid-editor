@@ -360,7 +360,8 @@ $.fn.gridEditor = function( options ) {
                 .appendTo(detailsDiv)
                 .change(function() {
                     container.attr('id', this.value);
-                });
+                })
+            ;
 
             var classGroup = $('<div class="btn-group" />').appendTo(detailsDiv);
             cssClasses.forEach(function(rowClass) {
