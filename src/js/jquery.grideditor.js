@@ -358,6 +358,9 @@ $.fn.gridEditor = function( options ) {
                 .val(container.attr('id'))
                 .attr('title', 'Set a unique identifier')
                 .appendTo(detailsDiv)
+                .change(function() {
+                    container.attr('id', this.value);
+                })
             ;
 
             var classGroup = $('<div class="btn-group" />').appendTo(detailsDiv);
