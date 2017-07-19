@@ -358,6 +358,9 @@ $.fn.gridEditor = function( options ) {
                 .val(container.attr('id'))
                 .attr('title', 'Set a unique identifier')
                 .appendTo(detailsDiv)
+                .change(function() {
+                    container.attr('id', this.value);
+                })
             ;
 
             var classGroup = $('<div class="btn-group" />').appendTo(detailsDiv);
@@ -651,6 +654,7 @@ $.fn.gridEditor.RTEs = {};
                     contentArea.addClass('active');
 
                     var configuration = $.extend(
+                        true, // deep copy
                         {},
                         (settings.summernote && settings.summernote.config ? settings.summernote.config : {}),
                         {
