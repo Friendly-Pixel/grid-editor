@@ -18,6 +18,7 @@
                     contentArea.addClass('active');
 
                     var configuration = $.extend(
+                        true, // deep copy
                         {},
                         (settings.summernote && settings.summernote.config ? settings.summernote.config : {}),
                         {
