@@ -26,7 +26,6 @@ $.fn.gridEditor = function( options ) {
             grideditor.appendHtml(arguments[1]);
             return self;
         } else {
-            //return self.html();
             return self;
         }
     }
