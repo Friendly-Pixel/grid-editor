@@ -21,6 +21,16 @@ $.fn.gridEditor = function( options ) {
         }
     } 
     
+    if (arguments[0] == 'appendHtml') {
+        if (grideditor) {
+            grideditor.appendHtml(arguments[1]);
+            return self;
+        } else {
+            //return self.html();
+            return self;
+        }
+    }
+    
     /** Initialize plugin */
 
     self.each(function(baseIndex, baseElem) {
@@ -544,6 +554,14 @@ $.fn.gridEditor = function( options ) {
         
         function clamp(input, min, max) {
             return Math.min(max, Math.max(min, input));
+        }
+        
+        function appendHtml(html) {
+
+            var row = createRow().appendTo(canvas);
+            row.html(html);
+            init();
+
         }
 
         baseElem.data('grideditor', {
