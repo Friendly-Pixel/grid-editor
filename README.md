@@ -42,6 +42,13 @@ __`getHtml`:__ Returns the clean html.
 ```javascript
 var html = $('#myGrid').gridEditor('getHtml');
 ```
+
+
+__`appendHtml`:__ Append an html string in a new row
+
+```javascript
+$('#myGrid').gridEditor('appendHtml', '<div class="col-md-12">My custom content in a col</div>');
+```
     
 Options
 -------
