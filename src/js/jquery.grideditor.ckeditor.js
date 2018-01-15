@@ -55,7 +55,11 @@
                 
                 // Destroy all CKEditor instances
                 $.each(CKEDITOR.instances, function(_, instance) {
-                    instance.destroy();
+                    try {
+                        instance.destroy();
+                    }
+                    catch(e) {
+                    }
                 });
 
                 // Cleanup
