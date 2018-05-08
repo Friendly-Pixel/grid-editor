@@ -119,11 +119,20 @@ $('#myGrid').gridEditor({
 });
 ```
 
-__`source_textarea`:__ Allows to set an already existing textarea as in-/output for grid editor
+__`source_textarea`:__ Allows to set an already existing textarea as input for grid editor.
 
 ```javascript
 $('#myGrid').gridEditor({
-    source_textarea: 'textarea.grideditor',
+    source_textarea: 'textarea.myTextarea',
+});
+```
+
+You will have write back the content to the textarea before saving, for example in this way:
+
+```javascript
+$('form.myForm').on('submit', function() {
+    var html = $('#myGrid').gridEditor('getHtml');
+    $('textarea.myTextarea').val(html);
 });
 ```
 
