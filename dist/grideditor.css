@@ -78,6 +78,9 @@
 .ge-canvas.ge-editing .ge-tools-drawer .ge-details .btn-group a {
   color: #333;
 }
+.ge-canvas.ge-editing .ge-tools-drawer .ge-details .btn-group a.active {
+  color: white;
+}
 .ge-canvas.ge-editing .ge-tools-drawer .ge-details .btn-group a:hover {
   text-decoration: none;
   cursor: pointer;
