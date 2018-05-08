@@ -3,7 +3,7 @@ Grid Editor
 
 Grid Editor is a visual javascript editor for the [bootstrap 4 grid system](http://getbootstrap.com/css/#grid), written as a [jQuery](http://jquery.com/) plugin. You can create, drag, resize and delete rows and columns, and set different column widths for tablets and phones.
 
-(Looking for the bootstrap __3__ version? Use the `0.*` version in the [bootstrap_3 branch](https://github.com/Frontwise/grid-editor/tree/bootstrap_3))
+(Looking for the __bootstrap 3 support__? Use the version 0 in the [bootstrap_3 branch](https://github.com/Frontwise/grid-editor/tree/bootstrap_3))
 
 It provides integration plugins for the following rich text editors to edit column content: TinyMCE, summernote and CKEditor.
 
@@ -45,7 +45,7 @@ __`getHtml`:__ Returns the clean html.
 var html = $('#myGrid').gridEditor('getHtml');
 ```
 
-__`remove`:__ Completely remove grideditor
+__`remove`:__ Completely remove grideditor.
 
 ```javascript
 var html = $('#myGrid').gridEditor('remove');
@@ -72,9 +72,9 @@ $('#myGrid').gridEditor({
 });
 ```
 
-__`col_classes`:__ The same as row_classes, but for columns.
+__`col_classes`:__ The same as `row_classes`, but for columns.
 
-__`row_tools`:__ Add extra tool button to the row toolbar.
+__`row_tools`:__ Add extra tool buttons to the row toolbar.
 
 ```javascript
 $('#myGrid').gridEditor({
@@ -195,11 +195,11 @@ $('#myGrid').gridEditor({
 });
 ```
 
-Font Awesome
-------------
 
-Grid Editor can easily be used with [Font Awesome](http://fontawesome.io) by including `dist/grideditor-font-awesome.css`. Note that Font Awesome (min. version 4.0) has to be included before this stylesheet.
+Upgrading
+---------
 
+See UPGRADING.md for the changes you have to make when upgrading from grid-editor version 0 to 1.
 
 Building
 --------
