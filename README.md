@@ -16,7 +16,7 @@ Installation
     * If you want to use the tincyMCE integration, include tinyMCE and tinyMCE jQuery plugin as well.
     * If you want to use the summernote integration, include summernote as well.
     * If you want to use the CKEditor integration, include CKEditor as well.
-* [Download the latest version of Grid Editor](https://github.com/Frontwise/grid-editor/archive/master.zip) and include it in your page: 
+* [Download the bootstrap 3 branch of Grid Editor](https://github.com/Frontwise/grid-editor/archive/bootstrap_3.zip) and include it in your page: 
 
 ```html
 <!-- Make sure jQuery, jQuery UI, and bootstrap 3 are included. TinyMCE is optional. -->
