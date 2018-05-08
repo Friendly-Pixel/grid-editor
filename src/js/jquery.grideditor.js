@@ -68,7 +68,7 @@ $.fn.gridEditor = function( options ) {
             addRowGroup,
             htmlTextArea
         ;
-        var colClasses = ['col-md-', 'col-sm-', 'col-xs-'];
+        var colClasses = ['col-lg-', 'col-sm-', 'col-'];
         var curColClassIndex = 0; // Index of the column class we are manipulating currently
         var MAX_COL_SIZE = 12;
         
@@ -80,8 +80,8 @@ $.fn.gridEditor = function( options ) {
         // Wrap content if it is non-bootstrap
         if (baseElem.children().length && !baseElem.find('div.row').length) {
             var children = baseElem.children();
-            var newRow = $('<div class="row"><div class="col-md-12"/></div>').appendTo(baseElem);
-            newRow.find('.col-md-12').append(children);
+            var newRow = $('<div class="row"><div class="col-lg-12"/></div>').appendTo(baseElem);
+            newRow.find('.col-lg-12').append(children);
         }
 
         setup();
@@ -100,7 +100,7 @@ $.fn.gridEditor = function( options ) {
             // Add row
             addRowGroup = $('<div class="ge-addRowGroup btn-group" />').appendTo(wrapper);
             $.each(settings.new_row_layouts, function(j, layout) {
-                var btn = $('<a class="btn btn-xs btn-primary" />')
+                var btn = $('<a class="btn btn-sm btn-primary" />')
                     .attr('title', 'Add row ' + layout.join('-'))
                     .on('click', function() {
                         var row = createRow().appendTo(canvas);
@@ -117,7 +117,7 @@ $.fn.gridEditor = function( options ) {
                 var layoutName = layout.join(' - ');
                 var icon = '<div class="row ge-row-icon">';
                 layout.forEach(function(i) {
-                    icon += '<div class="column col-xs-' + i + '"/>';
+                    icon += '<div class="column col-' + i + '"/>';
                 });
                 icon += '</div>';
                 btn.append(icon);
@@ -125,7 +125,7 @@ $.fn.gridEditor = function( options ) {
 
             // Buttons on right
             var layoutDropdown = $('<div class="dropdown pull-right ge-layout-mode">' +
-                '<button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown"><span>Desktop</span></button>' +
+                '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown"><span>Desktop</span></button>' +
                 '<ul class="dropdown-menu" role="menu">' +
                     '<li><a data-width="auto" title="Desktop"><span>Desktop</span></a></li>' +
                     '<li><a title="Tablet"><span>Tablet</span></li>' +
@@ -144,7 +144,7 @@ $.fn.gridEditor = function( options ) {
             var btnGroup = $('<div class="btn-group pull-right"/>')
                 .appendTo(wrapper)
             ;
-            var htmlButton = $('<button title="Edit Source Code" type="button" class="btn btn-xs btn-primary gm-edit-mode"><span class="glyphicon glyphicon-chevron-left"></span><span class="glyphicon glyphicon-chevron-right"></span></button>')
+            var htmlButton = $('<button title="Edit Source Code" type="button" class="btn btn-sm btn-primary gm-edit-mode"><span class="glyphicon glyphicon-chevron-left"></span><span class="glyphicon glyphicon-chevron-right"></span></button>')
                 .on('click', function() {
                     if (htmlButton.hasClass('active')) {
                         canvas.empty().html(htmlTextArea.val()).show();
@@ -164,7 +164,7 @@ $.fn.gridEditor = function( options ) {
                 })
                 .appendTo(btnGroup)
             ;
-            var previewButton = $('<button title="Preview" type="button" class="btn btn-xs btn-primary gm-preview"><span class="glyphicon glyphicon-eye-open"></span></button>')
+            var previewButton = $('<button title="Preview" type="button" class="btn btn-sm btn-primary gm-preview"><span class="glyphicon glyphicon-eye-open"></span></button>')
                 .on('mouseenter', function() {
                     canvas.removeClass('ge-editing');
                 })
@@ -381,7 +381,7 @@ $.fn.gridEditor = function( options ) {
 
             var classGroup = $('<div class="btn-group" />').appendTo(detailsDiv);
             cssClasses.forEach(function(rowClass) {
-                var btn = $('<a class="btn btn-xs btn-default" />')
+                var btn = $('<a class="btn btn-sm btn-default" />')
                     .html(rowClass.label)
                     .attr('title', rowClass.title ? rowClass.title : 'Toggle "' + rowClass.label + '" styling')
                     .toggleClass('active btn-primary', container.hasClass(rowClass.cssClass))

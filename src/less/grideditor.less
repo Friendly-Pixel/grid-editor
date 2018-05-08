@@ -30,10 +30,15 @@
             background: #f4f4f4;
             color: @rowTextColor;
             border-color: #999;
+            display: flex;
+            align-items: center;
+            
+            &:hover {
+                background: #E3E3E3;
+            }
         }
         
         .ge-row-icon {
-            display: inline-block;
             width: 48px;
             margin: 0;
             
@@ -80,6 +85,7 @@
         background: blue;
         margin: 0 -@editGutter @editGutter;
         display: block;
+        width: calc(~"100% +" 2 * @editGutter);
         
         > a {
             display: inline-block;
@@ -168,32 +174,79 @@
 
 /* Layout modes */
 
-.layoutMode(phone, xs, sm, md, lg, 450px);
-.layoutMode(tablet, sm, xs, md, lg, 800px);
-.layoutMode(desktop, md, xs, sm, lg, none);
+// xs = ''
+.layoutMode(phone, col, col-sm, col-md, col-lg, col-xl, 400px);
+.layoutMode(tablet, col-sm, col, col-md, col-lg, col-xl, 800px);
+.layoutMode(desktop, col-lg, col, col-sm, col-md, col-xl, none);
 
-.layoutMode(@type, @e, @d1, @d2, @d3, @maxWidth) {
+.layoutMode(@type, @e, @d1, @d2, @d3, @d4, @maxWidth) {
     .ge-canvas.ge-layout-@{type} {
         max-width: @maxWidth;
         margin-left: auto;
         margin-right: auto;
-        .disable-columns(@d1, @d2, @d3);
+        .disable-columns(@d1, @d2, @d3, @d4);
         .generate-columns(@e);
     }
 }
 
-.disable-columns(@d1, @d2, @d3, @i: 1) when (@i =< 12) {
-  .col-@{d1}-@{i},
-  .col-@{d2}-@{i},
-  .col-@{d3}-@{i} {
+.disable-columns(@d1, @d2, @d3, @d4, @i: 1) when (@i =< 12) {
+  .@{d1}-@{i},
+  .@{d2}-@{i},
+  .@{d3}-@{i} {
     width: inherit;
   }
-  .disable-columns(@d1, @d2, @d3, (@i + 1));
+  .disable-columns(@d1, @d2, @d3, @d4, (@i + 1));
 }
 
 .generate-columns(@e, @i: 1) when (@i =< 12) {
-  .col-@{e}-@{i} {
-    width: @i * 8.33333333333%;
+  .@{e}-@{i} {
+    flex: 0 0 @i * 8.33333333333%;
+    max-width: @i * 8.33333333333%;
   }
   .generate-columns(@e, (@i + 1));
+}
+
+/* Font Awesome Integration for Grid Editor
+ * (min. Version 4.0)
+ */
+.ge-canvas.ge-editing .ge-tools-drawer > a {
+    padding: 3px 5px;
+}
+.ge-canvas .glyphicon,
+.ge-mainControls .glyphicon {
+    top: 0;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.ge-canvas .glyphicon-move:before {
+    content: "\f047";
+}
+.ge-canvas .glyphicon-minus:before {
+    content: "\f147";
+}
+.ge-canvas .glyphicon-plus:before {
+    content: "\f196";
+}
+.ge-canvas .glyphicon-cog:before {
+    content: "\f013";
+}
+.ge-canvas .glyphicon-trash:before {
+    content: "\f014";
+}
+.ge-canvas .glyphicon-plus-sign:before,
+.ge-mainControls .glyphicon-plus-sign:before {
+    content: "\f055";
+}
+.ge-mainControls .glyphicon-eye-open:before {
+    content: "\f06e";
+}
+.ge-mainControls .glyphicon-chevron-left:before {
+    content: "\f121";
+}
+.ge-mainControls .glyphicon-chevron-right {
+    display: none;
 }

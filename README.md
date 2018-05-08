@@ -1,7 +1,9 @@
 Grid Editor
 ===========
 
-Grid Editor is a visual javascript editor for the [bootstrap 3 grid system](http://getbootstrap.com/css/#grid), written as a [jQuery](http://jquery.com/) plugin. You can create, drag, resize and delete rows and columns, and set different column widths for tablets and phones.
+Grid Editor is a visual javascript editor for the [bootstrap 4 grid system](http://getbootstrap.com/css/#grid), written as a [jQuery](http://jquery.com/) plugin. You can create, drag, resize and delete rows and columns, and set different column widths for tablets and phones.
+
+(Looking for the bootstrap __3__ version? Use the `0.*` version in the [bootstrap_3 branch](https://github.com/Frontwise/grid-editor/tree/bootstrap_3))
 
 It provides integration plugins for the following rich text editors to edit column content: TinyMCE, summernote and CKEditor.
 
@@ -12,14 +14,14 @@ It provides integration plugins for the following rich text editors to edit colu
 Installation
 ------------
 
-* __Dependencies:__ Grid Editor depends on jQuery, jQuery UI, and Bootstap, so make sure you have included those in the page. 
+* __Dependencies:__ Grid Editor depends on jQuery, jQuery UI, Font Awesome, and Bootstap, so make sure you have included those in the page. 
     * If you want to use the tincyMCE integration, include tinyMCE and tinyMCE jQuery plugin as well.
     * If you want to use the summernote integration, include summernote as well.
-    * If you want to use the CKEditor integration, include CKEditor as well.
+    * If you want to use the CKEditor integration... you get the point.
 * [Download the latest version of Grid Editor](https://github.com/Frontwise/grid-editor/archive/master.zip) and include it in your page: 
 
 ```html
-<!-- Make sure jQuery, jQuery UI, and bootstrap 3 are included. TinyMCE is optional. -->
+<!-- Make sure jQuery, jQuery UI, font awesome, and bootstrap 4 are included. TinyMCE is optional. -->
 <link rel="stylesheet" type="text/css" href="grid-editor/dist/grideditor.css" />
 <script src="grid-editor/dist/jquery.grideditor.min.js"></script>
 ```
