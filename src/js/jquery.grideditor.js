@@ -19,6 +19,13 @@ $.fn.gridEditor = function( options ) {
         } else {
             return self.html();
         }
+    }
+    
+    if (arguments[0] == 'remove') {
+        if (grideditor) {
+            grideditor.remove();
+        }
+        return;
     } 
     
     /** Initialize plugin */
@@ -57,6 +64,7 @@ $.fn.gridEditor = function( options ) {
         // Elems
         var canvas,
             mainControls,
+            wrapper, // controls wrapper
             addRowGroup,
             htmlTextArea
         ;
@@ -83,13 +91,11 @@ $.fn.gridEditor = function( options ) {
             /* Setup canvas */
             canvas = baseElem.addClass('ge-canvas');
             
-            if (typeof htmlTextArea === 'undefined' || !htmlTextArea.length) {
-                htmlTextArea = $('<textarea class="ge-html-output"/>').insertBefore(canvas);
-            }
+            htmlTextArea = $('<textarea class="ge-html-output"/>').insertBefore(canvas);
 
             /* Create main controls*/
             mainControls = $('<div class="ge-mainControls" />').insertBefore(htmlTextArea);
-            var wrapper = $('<div class="ge-wrapper ge-top" />').appendTo(mainControls);
+            wrapper = $('<div class="ge-wrapper ge-top" />').appendTo(mainControls);
 
             // Add row
             addRowGroup = $('<div class="ge-addRowGroup btn-group" />').appendTo(wrapper);
@@ -174,40 +180,48 @@ $.fn.gridEditor = function( options ) {
             ;
 
             // Make controls fixed on scroll
-            var $window = $(window);
-            $window.on('scroll', function(e) {
-                if (
-                    $window.scrollTop() > mainControls.offset().top &&
-                    $window.scrollTop() < canvas.offset().top + canvas.height()
-                ) {
-                    if (wrapper.hasClass('ge-top')) {
-                        wrapper
-                            .css({
-                                left: wrapper.offset().left,
-                                width: wrapper.outerWidth(),
-                            })
-                            .removeClass('ge-top')
-                            .addClass('ge-fixed')
-                        ;
-                    }
-                } else {
-                    if (wrapper.hasClass('ge-fixed')) {
-                        wrapper
-                            .css({ left: '', width: '' })
-                            .removeClass('ge-fixed')
-                            .addClass('ge-top')
-                        ;
-                    }
-                }
-            });
+            $(window).on('scroll', onScroll);
 
             /* Init RTE on click */
-            canvas.on('click', '.ge-content', function(e) {
-                var rte = getRTE($(this).data('ge-content-type'));
-                if (rte) {
-                    rte.init(settings, $(this));
+            canvas.on('click', '.ge-content', initRTE);
+        }
+        
+        function onScroll(e) {
+            var $window = $(window);
+            
+            if (
+                $window.scrollTop() > mainControls.offset().top &&
+                $window.scrollTop() < canvas.offset().top + canvas.height()
+            ) {
+                if (wrapper.hasClass('ge-top')) {
+                    wrapper
+                        .css({
+                            left: wrapper.offset().left,
+                            width: wrapper.outerWidth(),
+                        })
+                        .removeClass('ge-top')
+                        .addClass('ge-fixed')
+                    ;
                 }
-            });
+            } else {
+                if (wrapper.hasClass('ge-fixed')) {
+                    wrapper
+                        .css({ left: '', width: '' })
+                        .removeClass('ge-fixed')
+                        .addClass('ge-top')
+                    ;
+                }
+            }
+        }
+        
+        function initRTE(e) {
+            if ($(this).hasClass('ge-rte-active')) { return; }
+            
+            var rte = getRTE($(this).data('ge-content-type'));
+            if (rte) {
+                $(this).addClass('ge-rte-active', true);
+                rte.init(settings, $(this));
+            }
         }
 
         function reset() {
@@ -228,13 +242,22 @@ $.fn.gridEditor = function( options ) {
 
         function deinit() {
             canvas.removeClass('ge-editing');
-            var contents = canvas.find('.ge-content').each(function() {
+            var contents = canvas.find('.ge-content').removeClass('ge-rte-active').each(function() {
                 var content = $(this);
                 getRTE(content.data('ge-content-type')).deinit(settings, content);
             });
             canvas.find('.ge-tools-drawer').remove();
             removeSortable();
-            runFilter();
+            runFilter(false);
+        }
+        
+        function remove() {
+            deinit();
+            mainControls.remove();
+            htmlTextArea.remove();
+            $(window).off('scroll', onScroll);
+            canvas.off('click', '.ge-content', initRTE);
+            canvas.removeData('grideditor');
         }
 
         function createRowControls() {
@@ -542,6 +565,7 @@ $.fn.gridEditor = function( options ) {
         baseElem.data('grideditor', {
             init: init,
             deinit: deinit,
+            remove: remove,
         });
 
     });

@@ -42,6 +42,12 @@ __`getHtml`:__ Returns the clean html.
 ```javascript
 var html = $('#myGrid').gridEditor('getHtml');
 ```
+
+__`remove`:__ Completely remove grideditor
+
+```javascript
+var html = $('#myGrid').gridEditor('remove');
+```
     
 Options
 -------
