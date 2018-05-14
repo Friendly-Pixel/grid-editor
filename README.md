@@ -204,12 +204,12 @@ See UPGRADING.md for the changes you have to make when upgrading from grid-edito
 Building
 --------
 
-If you want to make your own changes to the source, see BUILDING.md
+If you want to make your own changes to the source, see [BUILDING.md](/BUILDING.md)
 
 
 Contributing
 --------
-If you want to help out, please first read CONTRIBUTING.md
+If you want to help out, please first read [CONTRIBUTING.md](/CONTRIBUTING.md)
 
 
 Attribution
