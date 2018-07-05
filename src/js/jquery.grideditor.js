@@ -363,6 +363,8 @@ $.fn.gridEditor = function( options ) {
                 $.each(eventHandlers, function(name, func) {
                     tool.on(name, func);
                 });
+
+                typeof (eventHandlers['init']) === 'function' && eventHandlers['init'](tool);
             }
         }
 
