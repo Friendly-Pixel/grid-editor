@@ -7,9 +7,9 @@ $.fn.gridEditor = function( options ) {
 
     var self = this;
     var grideditor = self.data('grideditor');
-    
+
     /** Methods **/
-    
+
     if (arguments[0] == 'getHtml') {
         if (grideditor) {
             grideditor.deinit();
@@ -20,14 +20,14 @@ $.fn.gridEditor = function( options ) {
             return self.html();
         }
     }
-    
+
     if (arguments[0] == 'remove') {
         if (grideditor) {
             grideditor.remove();
         }
         return;
-    } 
-    
+    }
+
     /** Initialize plugin */
 
     self.each(function(baseIndex, baseElem) {
@@ -57,7 +57,8 @@ $.fn.gridEditor = function( options ) {
             'custom_filter'     : '',
             'content_types'     : ['tinymce'],
             'valid_col_sizes'   : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            'source_textarea'   : ''
+            'source_textarea'   : '',
+            'container'         : false,
         }, options);
 
 
@@ -71,12 +72,12 @@ $.fn.gridEditor = function( options ) {
         var colClasses = ['col-lg-', 'col-sm-', 'col-'];
         var curColClassIndex = 0; // Index of the column class we are manipulating currently
         var MAX_COL_SIZE = 12;
-        
+
         // Copy html to sourceElement if a source textarea is given
         if (settings.source_textarea) {
             baseElem.html($(settings.source_textarea).val());
         }
-        
+
         // Wrap content if it is non-bootstrap
         if (baseElem.children().length && !baseElem.find('div.row').length) {
             var children = baseElem.children();
@@ -90,20 +91,27 @@ $.fn.gridEditor = function( options ) {
         function setup() {
             /* Setup canvas */
             canvas = baseElem.addClass('ge-canvas');
-            
+
             htmlTextArea = $('<textarea class="ge-html-output"/>').insertBefore(canvas);
 
             /* Create main controls*/
             mainControls = $('<div class="ge-mainControls" />').insertBefore(htmlTextArea);
             wrapper = $('<div class="ge-wrapper ge-top" />').appendTo(mainControls);
 
+            // Add Container Options
+            containerHtml = $('<div class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-sm btn-secondary active"><input type="radio" name="ge-container" value="container" checked> Container</label><label class="btn btn-sm btn-secondary"><input type="radio" name="ge-container" value="container-fluid" > Container Fluid</label></div>').appendTo(wrapper);
             // Add row
             addRowGroup = $('<div class="ge-addRowGroup btn-group" />').appendTo(wrapper);
             $.each(settings.new_row_layouts, function(j, layout) {
                 var btn = $('<a class="btn btn-sm btn-primary" />')
                     .attr('title', 'Add row ' + layout.join('-'))
                     .on('click', function() {
-                        var row = createRow().appendTo(canvas);
+                        if (settings.container) {
+                            var container = createContainer().appendTo(canvas);
+                            var row = createRow().appendTo(container);
+                        } else {
+                            var row = createRow().appendTo(canvas);
+                        }
                         layout.forEach(function(i) {
                             createColumn(i).appendTo(row);
                         });
@@ -185,10 +193,10 @@ $.fn.gridEditor = function( options ) {
             /* Init RTE on click */
             canvas.on('click', '.ge-content', initRTE);
         }
-        
+
         function onScroll(e) {
             var $window = $(window);
-            
+
             if (
                 $window.scrollTop() > mainControls.offset().top &&
                 $window.scrollTop() < canvas.offset().top + canvas.height()
@@ -213,10 +221,10 @@ $.fn.gridEditor = function( options ) {
                 }
             }
         }
-        
+
         function initRTE(e) {
             if ($(this).hasClass('ge-rte-active')) { return; }
-            
+
             var rte = getRTE($(this).data('ge-content-type'));
             if (rte) {
                 $(this).addClass('ge-rte-active', true);
@@ -250,7 +258,7 @@ $.fn.gridEditor = function( options ) {
             removeSortable();
             runFilter(false);
         }
-        
+
         function remove() {
             deinit();
             mainControls.remove();
@@ -324,7 +332,7 @@ $.fn.gridEditor = function( options ) {
                 createTool(drawer, 'Settings', '', 'glyphicon-cog', function() {
                     details.toggle();
                 });
-                
+
                 settings.col_tools.forEach(function(t) {
                     createTool(drawer, t.title || '', t.className || '', t.iconClass || 'glyphicon-wrench', t.on);
                 });
@@ -488,6 +496,12 @@ $.fn.gridEditor = function( options ) {
             return $('<div class="row" />');
         }
 
+        function createContainer() {
+            var containerType = $('[name="ge-container"]:checked').val();
+            return $('<div class="'+containerType+'" />');
+        }
+
+
         function createColumn(size) {
             return $('<div/>')
                 .addClass(colClasses.map(function(c) { return c + size; }).join(' '))
@@ -553,11 +567,11 @@ $.fn.gridEditor = function( options ) {
                 canvas.toggleClass(cssClass, i == colClassIndex);
             });
         }
-        
+
         function getRTE(type) {
             return $.fn.gridEditor.RTEs[type];
         }
-        
+
         function clamp(input, min, max) {
             return Math.min(max, Math.max(min, input));
         }
@@ -593,16 +607,16 @@ $.fn.gridEditor.RTEs = {};
                 var contentArea = $(this);
                 if (!contentArea.hasClass('active')) {
                     if (contentArea.html() == self.initialContent) {
-                        // CKEditor kills this '&nbsp' creating a non usable box :/ 
-                        contentArea.html('&nbsp;'); 
+                        // CKEditor kills this '&nbsp' creating a non usable box :/
+                        contentArea.html('&nbsp;');
                     }
-                    
+
                     // Add the .attr('contenteditable',''true') or CKEditor loads readonly
                     contentArea.addClass('active').attr('contenteditable', 'true');
-                    
+
                     var configuration = $.extend(
                         {},
-                        (settings.ckeditor && settings.ckeditor.config ? settings.ckeditor.config : {}), 
+                        (settings.ckeditor && settings.ckeditor.config ? settings.ckeditor.config : {}),
                         {
                             // Focus editor on creation
                             on: {
@@ -617,7 +631,7 @@ $.fn.gridEditor.RTEs = {};
                                     if (callback) {
                                         callback.call(this, evt);
                                     }
-                                    
+
                                     instance.focus();
                                 }
                             }
@@ -631,7 +645,7 @@ $.fn.gridEditor.RTEs = {};
         deinit: function(settings, contentAreas) {
             contentAreas.filter('.active').each(function() {
                 var contentArea = $(this);
-                
+
                 // Destroy all CKEditor instances
                 $.each(CKEDITOR.instances, function(_, instance) {
                     instance.destroy();
@@ -656,7 +670,7 @@ $.fn.gridEditor.RTEs = {};
     $.fn.gridEditor.RTEs.summernote = {
 
         init: function(settings, contentAreas) {
-            
+
             if (!jQuery().summernote) {
                 console.error('Summernote not available! Make sure you loaded the Summernote js file.');
             }
@@ -680,7 +694,7 @@ $.fn.gridEditor.RTEs = {};
                             // Focus editor on creation
                             callbacks: {
                                 onInit: function() {
-                                    
+
                                     // Call original oninit function, if one was passed in the config
                                     var callback;
                                     try {
@@ -691,7 +705,7 @@ $.fn.gridEditor.RTEs = {};
                                     if (callback) {
                                         callback.call(this);
                                     }
-                                    
+
                                     contentArea.summernote('focus');
                                 }
                             }
@@ -744,7 +758,7 @@ $.fn.gridEditor.RTEs = {};
                             oninit: function(editor) {
                                 // Bring focus to text field
                                 $('#' + editor.settings.id).focus();
-                                
+
                                 // Call original oninit function, if one was passed in the config
                                 var callback;
                                 try {
@@ -752,7 +766,7 @@ $.fn.gridEditor.RTEs = {};
                                 } catch (err) {
                                     // No callback passed
                                 }
-                                
+
                                 if (callback) {
                                     callback.call(this);
                                 }
