@@ -577,7 +577,7 @@ $.fn.gridEditor = function( options ) {
 $.fn.gridEditor.RTEs = {};
 
 })( jQuery );
-(function() {
+(function($) {
     $.fn.gridEditor.RTEs.ckeditor = {
 
         init: function(settings, contentAreas) {
@@ -650,8 +650,8 @@ $.fn.gridEditor.RTEs = {};
 
         initialContent: '<p>Lorem initius... </p>',
     };
-})();
-(function() {
+})(jQuery);
+(function($) {
 
     $.fn.gridEditor.RTEs.summernote = {
 
@@ -717,9 +717,9 @@ $.fn.gridEditor.RTEs = {};
 
         initialContent: '<p>Lorem ipsum dolores</p>',
     };
-})();
+})(jQuery);
 
-(function() {
+(function($) {
     $.fn.gridEditor.RTEs.tinymce = {
         init: function(settings, contentAreas) {
             if (!window.tinymce) {
@@ -782,4 +782,4 @@ $.fn.gridEditor.RTEs = {};
 
         initialContent: '<p>Lorem ipsum dolores</p>',
     };
-})();
+})(jQuery);
