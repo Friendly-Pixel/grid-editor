@@ -71,4 +71,4 @@
 
         initialContent: '<p>Lorem initius... </p>',
     };
-})(jQUery);
+})(jQuery);
