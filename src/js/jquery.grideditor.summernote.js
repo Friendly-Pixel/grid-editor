@@ -1,4 +1,4 @@
-(function() {
+(function($) {
 
     $.fn.gridEditor.RTEs.summernote = {
 
@@ -64,4 +64,4 @@
 
         initialContent: '<p>Lorem ipsum dolores</p>',
     };
-})();
+})(jQuery);

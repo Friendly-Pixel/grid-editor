@@ -1,4 +1,4 @@
-(function() {
+(function($) {
     $.fn.gridEditor.RTEs.ckeditor = {
 
         init: function(settings, contentAreas) {
@@ -71,4 +71,4 @@
 
         initialContent: '<p>Lorem initius... </p>',
     };
-})();
+})(jQUery);
