@@ -1,4 +1,4 @@
-(function() {
+(function($) {
     $.fn.gridEditor.RTEs.tinymce = {
         init: function(settings, contentAreas) {
             if (!window.tinymce) {
@@ -61,4 +61,4 @@
 
         initialContent: '<p>Lorem ipsum dolores</p>',
     };
-})();
+})(jQuery);
