@@ -57,7 +57,8 @@ $.fn.gridEditor = function( options ) {
             'custom_filter'     : '',
             'content_types'     : ['tinymce'],
             'valid_col_sizes'   : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            'source_textarea'   : ''
+            'source_textarea'   : '',
+            'init_rte_on_load'  : false
         }, options);
 
 
@@ -238,6 +239,9 @@ $.fn.gridEditor = function( options ) {
             createColControls();
             makeSortable();
             switchLayout(curColClassIndex);
+            if(settings.init_rte_on_load) {
+                canvas.find('.ge-content').click();
+            } 
         }
 
         function deinit() {
