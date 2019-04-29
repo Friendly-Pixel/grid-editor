@@ -57,7 +57,10 @@ $.fn.gridEditor = function( options ) {
             'custom_filter'     : '',
             'content_types'     : ['tinymce'],
             'valid_col_sizes'   : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            'source_textarea'   : ''
+            'source_textarea'   : '',
+            'display_layout_btn'  : true,
+            'display_edit_btn'    : true,
+            'display_preview_btn' : true
         }, options);
 
 
@@ -124,60 +127,68 @@ $.fn.gridEditor = function( options ) {
             });
 
             // Buttons on right
-            var layoutDropdown = $('<div class="dropdown pull-right ge-layout-mode">' +
-                '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown"><span>Desktop</span></button>' +
-                '<ul class="dropdown-menu" role="menu">' +
-                    '<li><a data-width="auto" title="Desktop"><span>Desktop</span></a></li>' +
-                    '<li><a title="Tablet"><span>Tablet</span></li>' +
-                    '<li><a title="Phone"><span>Phone</span></a></li>' +
-                    '</ul>' +
-                '</div>')
-                .on('click', 'a', function() {
-                    var a = $(this);
-                    switchLayout(a.closest('li').index());
-                    var btn = layoutDropdown.find('button');
-                    btn.find('span').remove();
-                    btn.append(a.find('span').clone());
-                })
-                .appendTo(wrapper)
-            ;
-            var btnGroup = $('<div class="btn-group pull-right"/>')
-                .appendTo(wrapper)
-            ;
-            var htmlButton = $('<button title="Edit Source Code" type="button" class="btn btn-sm btn-primary gm-edit-mode"><span class="glyphicon glyphicon-chevron-left"></span><span class="glyphicon glyphicon-chevron-right"></span></button>')
-                .on('click', function() {
-                    if (htmlButton.hasClass('active')) {
-                        canvas.empty().html(htmlTextArea.val()).show();
-                        init();
-                        htmlTextArea.hide();
-                    } else {
-                        deinit();
-                        htmlTextArea
-                            .height(0.8 * $(window).height())
-                            .val(canvas.html())
-                            .show()
-                        ;
-                        canvas.hide();
-                    }
+            if(settings.display_layout_btn) {
+                var layoutDropdown = $('<div class="dropdown pull-right ge-layout-mode">' +
+                    '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown"><span>Desktop</span></button>' +
+                    '<ul class="dropdown-menu" role="menu">' +
+                        '<li><a data-width="auto" title="Desktop"><span>Desktop</span></a></li>' +
+                        '<li><a title="Tablet"><span>Tablet</span></li>' +
+                        '<li><a title="Phone"><span>Phone</span></a></li>' +
+                        '</ul>' +
+                    '</div>')
+                    .on('click', 'a', function() {
+                        var a = $(this);
+                        switchLayout(a.closest('li').index());
+                        var btn = layoutDropdown.find('button');
+                        btn.find('span').remove();
+                        btn.append(a.find('span').clone());
+                    })
+                    .appendTo(wrapper)
+                ;
+            }
+            if(settings.display_edit_btn || settings.display_preview_btn) {
+                var btnGroup = $('<div class="btn-group pull-right"/>')
+                    .appendTo(wrapper)
+                ;
+            }
+            if(settings.display_edit_btn) {
+                var htmlButton = $('<button title="Edit Source Code" type="button" class="btn btn-sm btn-primary gm-edit-mode"><i class="fas fa-chevron-left"></i><i class="fas fa-chevron-right"></i></span></button>')
+                    .on('click', function() {
+                        if (htmlButton.hasClass('active')) {
+                            canvas.empty().html(htmlTextArea.val()).show();
+                            init();
+                            htmlTextArea.hide();
+                        } else {
+                            deinit();
+                            htmlTextArea
+                                .height(0.8 * $(window).height())
+                                .val(canvas.html())
+                                .show()
+                            ;
+                            canvas.hide();
+                        }
 
-                    htmlButton.toggleClass('active btn-danger');
-                })
-                .appendTo(btnGroup)
-            ;
-            var previewButton = $('<button title="Preview" type="button" class="btn btn-sm btn-primary gm-preview"><span class="glyphicon glyphicon-eye-open"></span></button>')
-                .on('mouseenter', function() {
-                    canvas.removeClass('ge-editing');
-                })
-                .on('click', function() {
-                    previewButton.toggleClass('active btn-danger').trigger('mouseleave');
-                })
-                .on('mouseleave', function() {
-                    if (!previewButton.hasClass('active')) {
-                        canvas.addClass('ge-editing');
-                    }
-                })
-                .appendTo(btnGroup)
-            ;
+                        htmlButton.toggleClass('active btn-danger');
+                    })
+                    .appendTo(btnGroup)
+                ;
+            }
+            if(settings.display_preview_btn) {
+                var previewButton = $('<button title="Preview" type="button" class="btn btn-sm btn-primary gm-preview"><i class="fas fa-eye"></i></button>')
+                    .on('mouseenter', function() {
+                        canvas.removeClass('ge-editing');
+                    })
+                    .on('click', function() {
+                        previewButton.toggleClass('active btn-danger').trigger('mouseleave');
+                    })
+                    .on('mouseleave', function() {
+                        if (!previewButton.hasClass('active')) {
+                            canvas.addClass('ge-editing');
+                        }
+                    })
+                    .appendTo(btnGroup)
+                ;
+            }
 
             // Make controls fixed on scroll
             $(window).on('scroll', onScroll);
