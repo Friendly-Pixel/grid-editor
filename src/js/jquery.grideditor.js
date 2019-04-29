@@ -74,7 +74,14 @@ $.fn.gridEditor = function( options ) {
         
         // Copy html to sourceElement if a source textarea is given
         if (settings.source_textarea) {
-            baseElem.html($(settings.source_textarea).val());
+            var sourceHtml = $(settings.source_textarea).val();
+            if($(sourceHtml).find('.row').length == 0) {
+                var row = createRow();
+                var column = createColumn(12).appendTo(row);
+                column.find('.ge-content').html(sourceHtml);
+                sourceHtml = column.html();
+            } 
+            baseElem.html(sourceHtml);
         }
         
         // Wrap content if it is non-bootstrap
