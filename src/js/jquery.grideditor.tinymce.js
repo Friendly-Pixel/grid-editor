@@ -21,8 +21,10 @@
                         {
                             inline: true,
                             oninit: function(editor) {
-                                // Bring focus to text field
-                                $('#' + editor.settings.id).focus();
+                                if(!settings.init_rte_on_load) {
+                                    // Bring focus to text field
+                                    $('#' + editor.settings.id).focus();
+                                }
                                 
                                 // Call original oninit function, if one was passed in the config
                                 var callback;

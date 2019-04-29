@@ -183,8 +183,10 @@ $.fn.gridEditor = function( options ) {
             // Make controls fixed on scroll
             $(window).on('scroll', onScroll);
 
-            /* Init RTE on click */
-            canvas.on('click', '.ge-content', initRTE);
+            if(!settings.init_rte_on_load) {
+                /* Init RTE on click */
+                canvas.on('click', '.ge-content', initRTE);
+            }
         }
         
         function onScroll(e) {
@@ -215,7 +217,7 @@ $.fn.gridEditor = function( options ) {
             }
         }
         
-        function initRTE(e) {
+        function initRTE() {
             if ($(this).hasClass('ge-rte-active')) { return; }
             
             var rte = getRTE($(this).data('ge-content-type'));
@@ -240,7 +242,7 @@ $.fn.gridEditor = function( options ) {
             makeSortable();
             switchLayout(curColClassIndex);
             if(settings.init_rte_on_load) {
-                canvas.find('.ge-content').click();
+                canvas.find('.ge-content').each(initRTE);
             } 
         }
 
