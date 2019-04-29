@@ -112,7 +112,7 @@ $.fn.gridEditor = function( options ) {
                     .appendTo(addRowGroup)
                 ;
 
-                btn.append('<span class="glyphicon glyphicon-plus-sign"/>');
+                btn.append('<i class="fas fa-plus"></i>');
 
                 var layoutName = layout.join(' - ');
                 var icon = '<div class="row ge-row-icon">';
@@ -144,7 +144,7 @@ $.fn.gridEditor = function( options ) {
             var btnGroup = $('<div class="btn-group pull-right"/>')
                 .appendTo(wrapper)
             ;
-            var htmlButton = $('<button title="Edit Source Code" type="button" class="btn btn-sm btn-primary gm-edit-mode"><span class="glyphicon glyphicon-chevron-left"></span><span class="glyphicon glyphicon-chevron-right"></span></button>')
+            var htmlButton = $('<button title="Edit Source Code" type="button" class="btn btn-sm btn-primary gm-edit-mode"><i class="fas fa-chevron-left"></i><i class="fas fa-chevron-right"></i></span></button>')
                 .on('click', function() {
                     if (htmlButton.hasClass('active')) {
                         canvas.empty().html(htmlTextArea.val()).show();
@@ -164,7 +164,7 @@ $.fn.gridEditor = function( options ) {
                 })
                 .appendTo(btnGroup)
             ;
-            var previewButton = $('<button title="Preview" type="button" class="btn btn-sm btn-primary gm-preview"><span class="glyphicon glyphicon-eye-open"></span></button>')
+            var previewButton = $('<button title="Preview" type="button" class="btn btn-sm btn-primary gm-preview"><i class="fas fa-eye"></i></button>')
                 .on('mouseenter', function() {
                     canvas.removeClass('ge-editing');
                 })
@@ -266,21 +266,21 @@ $.fn.gridEditor = function( options ) {
                 if (row.find('> .ge-tools-drawer').length) { return; }
 
                 var drawer = $('<div class="ge-tools-drawer" />').prependTo(row);
-                createTool(drawer, 'Move', 'ge-move', 'glyphicon-move');
-                createTool(drawer, 'Settings', '', 'glyphicon-cog', function() {
+                createTool(drawer, 'Move', 'ge-move', 'fas fa-arrows-alt');
+                createTool(drawer, 'Settings', '', 'fas fa-cog', function() {
                     details.toggle();
                 });
                 settings.row_tools.forEach(function(t) {
-                    createTool(drawer, t.title || '', t.className || '', t.iconClass || 'glyphicon-wrench', t.on);
+                    createTool(drawer, t.title || '', t.className || '', t.iconClass || 'fas fa-wrench', t.on);
                 });
-                createTool(drawer, 'Remove row', '', 'glyphicon-trash', function() {
+                createTool(drawer, 'Remove row', '', 'far fa-trash-alt', function() {
                     if (window.confirm('Delete row?')) {
                         row.slideUp(function() {
                             row.remove();
                         });
                     }
                 });
-                createTool(drawer, 'Add column', 'ge-add-column', 'glyphicon-plus-sign', function() {
+                createTool(drawer, 'Add column', 'ge-add-column', 'fas fa-plus-circle', function() {
                     row.append(createColumn(3));
                     init();
                 });
@@ -296,9 +296,9 @@ $.fn.gridEditor = function( options ) {
 
                 var drawer = $('<div class="ge-tools-drawer" />').prependTo(col);
 
-                createTool(drawer, 'Move', 'ge-move', 'glyphicon-move');
+                createTool(drawer, 'Move', 'ge-move', 'fas fa-arrows-alt');
 
-                createTool(drawer, 'Make column narrower\n(hold shift for min)', 'ge-decrease-col-width', 'glyphicon-minus', function(e) {
+                createTool(drawer, 'Make column narrower\n(hold shift for min)', 'ge-decrease-col-width', 'fas fa-minus', function(e) {
                     var colSizes = settings.valid_col_sizes;
                     var curColClass = colClasses[curColClassIndex];
                     var curColSizeIndex = colSizes.indexOf(getColSize(col, curColClass));
@@ -309,7 +309,7 @@ $.fn.gridEditor = function( options ) {
                     setColSize(col, curColClass, Math.max(newSize, 1));
                 });
 
-                createTool(drawer, 'Make column wider\n(hold shift for max)', 'ge-increase-col-width', 'glyphicon-plus', function(e) {
+                createTool(drawer, 'Make column wider\n(hold shift for max)', 'ge-increase-col-width', 'fas fa-plus', function(e) {
                     var colSizes = settings.valid_col_sizes;
                     var curColClass = colClasses[curColClassIndex];
                     var curColSizeIndex = colSizes.indexOf(getColSize(col, curColClass));
@@ -321,15 +321,15 @@ $.fn.gridEditor = function( options ) {
                     setColSize(col, curColClass, Math.min(newSize, MAX_COL_SIZE));
                 });
 
-                createTool(drawer, 'Settings', '', 'glyphicon-cog', function() {
+                createTool(drawer, 'Settings', '', 'fas fa-cog', function() {
                     details.toggle();
                 });
                 
                 settings.col_tools.forEach(function(t) {
-                    createTool(drawer, t.title || '', t.className || '', t.iconClass || 'glyphicon-wrench', t.on);
+                    createTool(drawer, t.title || '', t.className || '', t.iconClass || 'fas fa-wrench', t.on);
                 });
 
-                createTool(drawer, 'Remove col', '', 'glyphicon-trash', function() {
+                createTool(drawer, 'Remove col', '', 'far fa-trash-alt', function() {
                     if (window.confirm('Delete column?')) {
                         col.animate({
                             opacity: 'hide',
@@ -341,7 +341,7 @@ $.fn.gridEditor = function( options ) {
                     }
                 });
 
-                createTool(drawer, 'Add row', 'ge-add-row', 'glyphicon-plus-sign', function() {
+                createTool(drawer, 'Add row', 'ge-add-row', 'fas fa-plus-circle', function() {
                     var row = createRow();
                     col.append(row);
                     row.append(createColumn(6)).append(createColumn(6));
@@ -353,7 +353,7 @@ $.fn.gridEditor = function( options ) {
         }
 
         function createTool(drawer, title, className, iconClass, eventHandlers) {
-            var tool = $('<a title="' + title + '" class="' + className + '"><span class="glyphicon ' + iconClass + '"></span></a>')
+            var tool = $('<a title="' + title + '" class="' + className + '"><i class="' + iconClass + '"></i></a>')
                 .appendTo(drawer)
             ;
             if (typeof eventHandlers == 'function') {
