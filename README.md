@@ -14,7 +14,7 @@ It provides integration plugins for the following rich text editors to edit colu
 Installation
 ------------
 
-* __Dependencies:__ Grid Editor depends on jQuery, jQuery UI, Font Awesome, and Bootstap, so make sure you have included those in the page. 
+* __Dependencies:__ Grid Editor depends on jQuery, jQuery UI, Font Awesome 4 or 5, and Bootstap 4, so make sure you have included those in the page. 
     * If you want to use the tincyMCE integration, include tinyMCE and tinyMCE jQuery plugin as well.
     * If you want to use the summernote integration, include summernote as well.
     * If you want to use the CKEditor integration... you get the point.

@@ -43,6 +43,12 @@
   box-shadow: none;
   outline: none;
 }
+.ge-mainControls .pull-right {
+  float: right;
+}
+.ge-mainControls .dropdown-menu a {
+  cursor: default;
+}
 .ge-html-output {
   width: 100%;
   display: none;
@@ -65,7 +71,7 @@
   background: blue;
   margin: 0 -5px 5px;
   display: block;
-  width: calc(100% + 10px);
+  width: calc(100% + 2 * 5px);
 }
 .ge-canvas.ge-editing .ge-tools-drawer > a {
   display: inline-block;
