@@ -48,7 +48,7 @@ var html = $('#myGrid').gridEditor('getHtml');
 __`remove`:__ Completely remove grideditor.
 
 ```javascript
-var html = $('#myGrid').gridEditor('remove');
+$('#myGrid').gridEditor('remove');
 ```
     
 Options
