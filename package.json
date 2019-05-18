@@ -24,7 +24,7 @@
     "url": "https://github.com/Frontwise/grid-editor/issues"
   },
   "homepage": "https://github.com/Frontwise/grid-editor#readme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/jquery.grideditor.js",
   "directories": {
     "example": "example"
