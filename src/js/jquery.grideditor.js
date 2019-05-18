@@ -115,7 +115,7 @@ $.fn.gridEditor = function( options ) {
                             createColumn(i).appendTo(row);
                         });
                         init();
-                        if (row[0].scrollIntoView) row[0].scrollIntoView();
+                        if (row[0].scrollIntoView) row[0].scrollIntoView({behavior: 'smooth'});
                     })
                     .appendTo(addRowGroup)
                 ;
