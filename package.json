@@ -1,10 +1,16 @@
 {
+  "scripts": {
+    "build": "grunt",
+    "start": "npm run watch",
+    "watch": "grunt watch"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Frontwise/grid-editor.git"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-cli": "^1.3.2",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-cssmin": "^0.11.0",
@@ -12,7 +18,7 @@
     "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "^0.6.1"
   },
-  "name": "frontwise-grid-editor",
+  "name": "@frontwise/grid-editor",
   "description": "Visual javascript editor for the bootstrap grid system, written as a jQuery plugin.",
   "bugs": {
     "url": "https://github.com/Frontwise/grid-editor/issues"
