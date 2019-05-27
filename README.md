@@ -144,6 +144,22 @@ $('form.myForm').on('submit', function() {
 });
 ```
 
+__`scroll_to_row`:__ Allows disabling of scrolling to newly inserted row.
+
+```javascript
+$('#myGrid').gridEditor({
+    scroll_to_row: false,
+});
+```
+
+__`confirmations`:__ Disables the confirmation popup when deleting rows+cols
+
+```javascript
+$('#myGrid').gridEditor({
+    confirmations: false,
+});
+```
+
 ### Rich text editor options
 
 Grid editor comes bundles with support for the following rich text editors (RTEs): 
