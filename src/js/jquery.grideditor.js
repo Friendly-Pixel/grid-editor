@@ -57,7 +57,9 @@ $.fn.gridEditor = function( options ) {
             'custom_filter'     : '',
             'content_types'     : ['tinymce'],
             'valid_col_sizes'   : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            'source_textarea'   : ''
+            'source_textarea'   : '',
+            'confirmations'     : true,
+            'scroll_to_row'     : true
         }, options);
 
 
@@ -115,7 +117,10 @@ $.fn.gridEditor = function( options ) {
                             createColumn(i).appendTo(row);
                         });
                         init();
-                        if (row[0].scrollIntoView) row[0].scrollIntoView({behavior: 'smooth'});
+
+                        if (settings.scroll_to_row && row[0].scrollIntoView) {
+                            row[0].scrollIntoView({behavior: 'smooth'});
+                        }
                     })
                     .appendTo(addRowGroup)
                 ;
@@ -280,7 +285,7 @@ $.fn.gridEditor = function( options ) {
                     createTool(drawer, t.title || '', t.className || '', t.iconClass || 'fa fa-wrench', t.on);
                 });
                 createTool(drawer, 'Remove row', '', 'far fa-trash-alt', function() {
-                    if (window.confirm('Delete row?')) {
+                    if (!settings.confirmations || window.confirm('Delete row?')) {
                         row.slideUp(function() {
                             row.remove();
                         });
@@ -336,7 +341,7 @@ $.fn.gridEditor = function( options ) {
                 });
 
                 createTool(drawer, 'Remove col', '', 'far fa-trash-alt', function() {
-                    if (window.confirm('Delete column?')) {
+                    if (!settings.confirmations || window.confirm('Delete column?')) {
                         col.animate({
                             opacity: 'hide',
                             width: 'hide',
