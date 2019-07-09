@@ -279,7 +279,7 @@ $.fn.gridEditor = function( options ) {
                 settings.row_tools.forEach(function(t) {
                     createTool(drawer, t.title || '', t.className || '', t.iconClass || 'fa fa-wrench', t.on);
                 });
-                createTool(drawer, 'Remove row', '', 'far fa-trash-alt', function() {
+                createTool(drawer, 'Remove row', '', 'fa fa-trash-alt', function() {
                     if (window.confirm('Delete row?')) {
                         row.slideUp(function() {
                             row.remove();
@@ -335,7 +335,7 @@ $.fn.gridEditor = function( options ) {
                     createTool(drawer, t.title || '', t.className || '', t.iconClass || 'fa fa-wrench', t.on);
                 });
 
-                createTool(drawer, 'Remove col', '', 'far fa-trash-alt', function() {
+                createTool(drawer, 'Remove col', '', 'fa fa-trash-alt', function() {
                     if (window.confirm('Delete column?')) {
                         col.animate({
                             opacity: 'hide',
