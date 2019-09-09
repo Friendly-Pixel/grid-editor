@@ -471,6 +471,7 @@ $.fn.gridEditor = function( options ) {
                 connectWith: '.ge-canvas .row',
                 handle: '> .ge-tools-drawer .ge-move',
                 start: sortStart,
+                tolerance: 'pointer',
                 helper: 'clone',
             });
             canvas.add(canvas.find('.column')).sortable({
