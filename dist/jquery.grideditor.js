@@ -322,7 +322,7 @@ $.fn.gridEditor = function( options ) {
                     var newColSizeIndex = clamp(curColSizeIndex + 1, 0, colSizes.length - 1);
                     var newSize = colSizes[newColSizeIndex];
                     if (e.shiftKey) {
-                        newSize = colSizes[colSizes.length - 1];
+                        newSize = getColSize(col) + getColumnSpare(col.parent());
                     }
                     setColSize(col, curColClass, Math.min(newSize, MAX_COL_SIZE));
                 });
@@ -356,6 +356,19 @@ $.fn.gridEditor = function( options ) {
 
                 var details = createDetails(col, settings.col_classes).appendTo(drawer);
             });
+        }
+
+        function getColumnSpare(row) {
+            return MAX_COL_SIZE - getColumnSizes(row);
+        }
+
+        function getColumnSizes(row) {
+            var layout = colClasses[curColClassIndex];
+            var size = 0;
+            row.find('> [class*="'+layout+'"]').each(function(){
+                size += getColSize($(this));
+            });
+            return size;
         }
 
         function createTool(drawer, title, className, iconClass, eventHandlers) {
@@ -471,6 +484,7 @@ $.fn.gridEditor = function( options ) {
                 connectWith: '.ge-canvas .row',
                 handle: '> .ge-tools-drawer .ge-move',
                 start: sortStart,
+                tolerance: 'pointer',
                 helper: 'clone',
             });
             canvas.add(canvas.find('.column')).sortable({
