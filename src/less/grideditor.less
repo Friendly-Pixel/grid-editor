@@ -7,7 +7,7 @@
 .ge-mainControls {
     position: relative;
     min-height: 22px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     
     .ge-wrapper {
         padding-top: 5px;
@@ -24,33 +24,7 @@
         z-index: 20;
         top: 0;
     }
-    
-    .ge-addRowGroup {
-        .btn.btn-primary {
-            background: #f4f4f4;
-            color: @rowTextColor;
-            border-color: #999;
-            display: flex;
-            align-items: center;
-            
-            &:hover {
-                background: #E3E3E3;
-            }
-        }
-        
-        .ge-row-icon {
-            width: 48px;
-            margin: 0;
-            
-            .column {
-                height: 10px;
-                background: #666;
-                padding: 0;
-                border-left: 2px solid #f4f4f4;
-            }
-        }
-    }
-    
+
     .ge-layout-mode {
         margin-left: 5px;
     }
@@ -104,6 +78,35 @@
             background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
         }
+        .ge-menu {
+            .btn {
+                min-width: 50px;
+                background: #f4f4f4;
+                color: @rowTextColor;
+                border-color: #999;
+                display: flex;
+                align-items: center;
+
+                &:hover {
+                    background: #E3E3E3;
+                }
+            }
+            .btn-group {
+                flex-flow: wrap;
+            }
+            .ge-row-icon {
+                margin: 0;
+                padding: 0;
+                width: 48px;
+                margin: 0;
+                flex-wrap: nowrap;
+
+                .column {
+                    height: 10px;
+                    padding: 0;
+                }
+            }
+        }
         .ge-details {
             padding: 5px;
             border-top: 1px solid rgba(0,0,0,0.05);
@@ -151,6 +154,10 @@
             background: #e5e5e5;
         }
     }
+    /* Sorting */
+    .row.ui-sortable-placeholder {
+        max-height: 100px;
+    }
     .column {
         background-color: fadeout(@colColor, 85%);
         border: 1px solid @colColor;
@@ -177,7 +184,6 @@
         background: fadeout(yellow, 80%);
         visibility: visible !important;
         min-height: 50px;
-        max-height: 100px;
     }
 }
 
@@ -213,4 +219,9 @@
     max-width: @i * 8.33333333333%;
   }
   .generate-columns(@e, (@i + 1));
+}
+
+.ge-canvas.ge-editing .row .row .ge-tools-drawer a {
+    font-size: 0.8em;
+    padding: 4px;
 }
