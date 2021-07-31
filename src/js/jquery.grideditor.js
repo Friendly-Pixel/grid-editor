@@ -221,7 +221,7 @@ $.fn.gridEditor = function( options ) {
         }
         
         function initRTE(e) {
-            if ($(this).hasClass('ge-rte-active')) { return; }
+           // if ($(this).hasClass('ge-rte-active')) { return; }
             
             var rte = getRTE($(this).data('ge-content-type'));
             if (rte) {
