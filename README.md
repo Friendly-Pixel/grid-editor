@@ -1,9 +1,10 @@
 Grid Editor
 ===========
 
-Grid Editor is a visual javascript editor for the [bootstrap 4 grid system](http://getbootstrap.com/css/#grid), written as a [jQuery](http://jquery.com/) plugin. You can create, drag, resize and delete rows and columns, and set different column widths for tablets and phones.
+Grid Editor is a visual javascript editor for the [bootstrap 5 grid system](http://getbootstrap.com/css/#grid), written as a [jQuery](http://jquery.com/) plugin. You can create, drag, resize and delete rows and columns, and set different column widths for tablets and phones.
 
-(Looking for the __bootstrap 3 support__? Use version 0 in the [bootstrap_3 branch](https://github.com/Frontwise/grid-editor/tree/bootstrap_3))
+
+(Looking for the __bootstrap 3 support__? Use version 0 in the [bootstrap_3 branch](https://github.com/vahidalvandi/grid-editor/tree/bootstrap_3))
 
 It provides integration plugins for the following rich text editors to edit column content: TinyMCE, summernote and CKEditor.
 
@@ -14,7 +15,7 @@ It provides integration plugins for the following rich text editors to edit colu
 Installation
 ------------
 
-* __Dependencies:__ Grid Editor depends on jQuery, jQuery UI, Font Awesome 4 or 5, and Bootstap 4, so make sure you have included those in the page. 
+* __Dependencies:__ Grid Editor depends on jQuery, jQuery UI, Font Awesome 4 or 5, and Bootstap 5, so make sure you have included those in the page. 
     * If you want to use the tincyMCE integration, include tinyMCE and tinyMCE jQuery plugin as well.
     * If you want to use the summernote integration, include summernote as well.
     * If you want to use the CKEditor integration... you get the point.
