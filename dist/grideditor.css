@@ -18,7 +18,7 @@
 }
 .ge-mainControls .ge-addRowGroup .btn.btn-primary {
   background: #f4f4f4;
-  color: #666;
+  color: #222222;
   border-color: #999;
   display: flex;
   align-items: center;
@@ -119,21 +119,21 @@
   color: #666;
 }
 .ge-canvas.ge-editing .row > .ge-tools-drawer > a.ge-add-column {
-  color: #178acc;
+  color: #025281;
 }
 .ge-canvas.ge-editing .column {
-  background-color: rgba(47, 164, 231, 0.15);
-  border: 1px solid #2FA4E7;
+  background-color: rgba(3, 114, 179, 0.15);
+  border: 1px solid #0372b3;
   padding: 0 5px 5px;
 }
 .ge-canvas.ge-editing .column > .ge-tools-drawer {
   background: #afd5ea;
 }
 .ge-canvas.ge-editing .column > .ge-tools-drawer a {
-  color: #178acc;
+  color: #025281;
 }
 .ge-canvas.ge-editing .column > .ge-tools-drawer > a.ge-add-row {
-  color: #666;
+  color: #222222;
 }
 .ge-canvas.ge-editing .ge-content-type-tinymce.active {
   outline: 1px dotted #333;

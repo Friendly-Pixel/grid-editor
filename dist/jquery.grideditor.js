@@ -120,7 +120,7 @@ $.fn.gridEditor = function( options ) {
                     .appendTo(addRowGroup)
                 ;
 
-                btn.append('<i class="bi bi-plus-lg"></i>');
+                btn.append('<i class="bi bi-plus"></i>');
 
                 var layoutName = layout.join(' - ');
                 var icon = '<div class="row ge-row-icon">';
