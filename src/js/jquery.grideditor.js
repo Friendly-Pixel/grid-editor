@@ -170,7 +170,7 @@ $.fn.gridEditor = function( options ) {
                 })
                 .appendTo(btnGroup)
             ;
-            var previewButton = $('<button title="Preview" type="button" class="btn btn-sm btn-primary gm-preview"><i class="fa fa-eye"></i></button>')
+            var previewButton = $('<button title="Preview" type="button" class="btn btn-sm btn-primary gm-preview"><i class="bi bi-eye-fill"></i></button>')
                 .on('mouseenter', function() {
                     canvas.removeClass('ge-editing');
                 })
