@@ -125,7 +125,7 @@ $.fn.gridEditor = function( options ) {
                 var layoutName = layout.join(' - ');
                 var icon = '<div class="row ge-row-icon">';
                 layout.forEach(function(i) {
-                    icon += '<div class="column col-' + i + '"/>';
+                    icon += '<div class="column col-' + i + '"/></div>';
                 });
                 icon += '</div>';
                 btn.append(icon);
