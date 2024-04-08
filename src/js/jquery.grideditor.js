@@ -489,7 +489,7 @@ $.fn.gridEditor = function( options ) {
             });
             canvas.add(canvas.find('.column')).sortable({
                 items: '> .row, > .ge-content',
-                connectsWith: '.ge-canvas, .ge-canvas .column',
+                connectWith: '.ge-canvas, .ge-canvas .column',
                 handle: '> .ge-tools-drawer .ge-move',
                 start: sortStart,
                 helper: 'clone',
